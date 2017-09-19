@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="card-block">
+        <h4 class="card-title">
+            <h5 class="info">
+                <span class="high" translate>Buy</span>
+                <span class="right high">{{currencyPair?.base}} @ {{currencyInfo?.bid | number:'1.8-8'}} {{currencyPair?.quote}}</span>
+                <br>
+                <span class="low" translate>Sell</span>
+                <span class="right low">{{currencyPair?.base}} @ {{currencyInfo?.ask | number:'1.8-8'}} {{currencyPair?.quote}}</span>
+                <br>
+                <span class="volume" translate>Spread</span>
+                <span class="right volume">{{currencyInfo?.ask - currencyInfo?.bid | number:'1.8-8'}} {{currencyPair?.quote}}</span>
+            </h5>
+        </h4>
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- <h5 class="card-subtitle mb-2 text-muted"><span translate>Buy</span> {{currencyPair?.base}} @ {{currencyPair?.bid | number:'1.8-8'}} {{currencyPair?.quote}} </h5>
+                <h5 class="card-subtitle mb-2 text-muted"><span translate>Sell</span> {{currencyPair?.base}} @ {{currencyPair?.ask | number:'1.8-8'}} {{currencyPair?.quote}}</h5>
+                <h5 class="card-subtitle mb-2 text-muted"><span translate>Spread</span> {{currencyPair?.high - currencyPair?.low | number:'1.8-8'}} {{currencyPair?.quote}}</h5> -->
+
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <span class="input-group-addon" style="width:90px;"><span translate>Amount</span></span>
+                    <input type="text" class="form-control">
+                    <span class="input-group-addon" style="width:70px;">{{currencyPair?.base}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <span class="input-group-addon" style="width:90px;"><span translate>Price</span></span>
+                    <input type="text" class="form-control" [value]="currencyPair?.selectedPrice | number:'1.8-8'">
+                    <span class="input-group-addon" style="width:70px;">{{currencyPair?.quote}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <div class="input-group">
+                    <span class="input-group-addon" style="width:90px;"><span translate>Total</span></span>
+                    <input type="text" class="form-control">
+                    <span class="input-group-addon" style="width:70px;">{{currencyPair?.quote}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <button class="btn  btn-sm  btn-block btn-danger" translate>Buy</button>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn   btn-sm  btn-block btn-success" translate>Sell</button>
+            </div>
+        </div>
+    </div>
+</div>

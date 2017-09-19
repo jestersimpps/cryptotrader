@@ -1,0 +1,29 @@
+.sidenav-fab-container {
+    padding-top: 55px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.sidenav-fab-container md-sidenav {
+    padding-top: 60px;
+    max-width: 450px;
+}
+
+.sidenav-fab-container .mat-sidenav-content,
+.sidenav-fab-container md-sidenav {
+    display: flex;
+    overflow: visible;
+}
+
+.scrolling-content {
+    overflow: auto;
+}
+
+.fab {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}

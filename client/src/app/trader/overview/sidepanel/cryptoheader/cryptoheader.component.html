@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-block">
+        <h4 class="card-title">
+            <div class="currencyblock">
+                <a [routerLink]="['/exchanges',currencyPair?.exchange, currencyPair?.base + currencyPair?.quote ]" routerLinkActive="active">{{currencyPair?.symbol}}</a>
+                <span *ngIf="currencyPair?.percentage > 0" class="badge badge-pill badge-success pull-right">{{currencyPair?.percentage | percent}}</span>
+                <span *ngIf="currencyPair?.percentage < 0" class="badge badge-pill badge-danger pull-right">{{currencyPair?.percentage | percent}}</span>
+                <span *ngIf="currencyPair?.percentage == 0" class="badge badge-pill badge-default pull-right">{{currencyPair?.percentage | percent}}</span>
+            </div>
+            <div class="info">
+                <span class="" translate>{{currencyPair?.exchange}}</span>
+                <span class="right">{{currencyInfo?.timestamp | date:'medium'}}</span>
+            </div>
+        </h4>
+
+        <h6 class="price text-right">
+            {{currencyInfo?.last | number:'1.8-8'}} {{currencyPair?.quote}}
+        </h6>
+
+        <h5 class="info">
+            <span class="high" translate>High</span>
+            <span class="right high">{{currencyInfo?.high | number:'1.8-8'}} {{currencyPair?.quote}}</span>
+            <br>
+            <span class="low" translate>Low</span>
+            <span class="right low">{{currencyInfo?.low | number:'1.8-8'}} {{currencyPair?.quote}}</span>
+            <br>
+            <span class="volume" translate>Volume</span>
+            <span class="right volume">{{currencyInfo?.baseVolume | number:'1.0-2'}} {{currencyPair?.quote}}</span>
+        </h5>
+    </div>
+</div>

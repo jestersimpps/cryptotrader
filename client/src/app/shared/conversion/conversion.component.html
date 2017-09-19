@@ -1,0 +1,8 @@
+<div class="nav-item" ngbDropdown>
+
+    <a id="conversion-dropdown" class="nav-link" ngbDropdownToggle>{{currentConversion}}</a>
+    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="conversion-dropdown">
+        <button class="dropdown-item" *ngFor="let conversionRate of conversionRates" (click)="setConversion(conversionRate)">{{conversionRate.currency}}</button>
+
+    </div>
+</div>
