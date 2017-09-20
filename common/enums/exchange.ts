@@ -1,3 +1,3 @@
 export enum Exchange {
-    poloniex = 1
+    poloniex = "poloniex"
 }
