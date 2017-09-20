@@ -1,3 +1,7 @@
 export enum Exchange {
-    poloniex = "poloniex"
+    poloniex = "poloniex",
+    kraken = "kraken",
+    bittrex = "bittrex",
+    bitfinex = "bitfinex",
+    gdax = "gdax",
 }
