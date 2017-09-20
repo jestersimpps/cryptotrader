@@ -8,3 +8,13 @@ async function bootstrap() {
   await app.listen(8080);
 }
 bootstrap();
+
+declare global {
+  interface String {
+      json(): string;
+  }
+}
+
+String.prototype.json = function (): string {
+  return JSON.parse(this);
+}
