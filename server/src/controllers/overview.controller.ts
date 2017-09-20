@@ -8,7 +8,7 @@ export class OverviewController {
     constructor(private overviewService: OverviewService) { }
 
     @Get()
-    findAll(): Observable<any[]> {
+    getTicker(): Observable<any> {
         return this.overviewService.getTradingPairs();
     }
 }
