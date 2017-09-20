@@ -9,7 +9,7 @@ import { Exchange } from '../../../../common/enums/exchange';
 @Component()
 export class PoloniexWrapper extends ApiWrapper {
 
-    apiEndpoint: string = `https://poloniex.com/public`;
+    publicEndpoint: string = `https://poloniex.com/public?command=`;
     exchange: Exchange = Exchange.poloniex;
 
     getTicker(): Observable<TickerDto[]> {

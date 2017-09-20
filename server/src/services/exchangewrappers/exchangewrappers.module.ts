@@ -1,3 +1,4 @@
+import { KrakenWrapper } from './kraken.wrapper';
 import { Module } from '@nestjs/common';
 import { PoloniexWrapper } from './poloniex.wrapper';
 import { ApiWrapper } from './api.wrapper';
@@ -5,10 +6,12 @@ import { ApiWrapper } from './api.wrapper';
 @Module({
     components: [
         ApiWrapper,
-        PoloniexWrapper
+        PoloniexWrapper,
+        KrakenWrapper
     ],
     exports: [
-        PoloniexWrapper
+        PoloniexWrapper,
+        KrakenWrapper
     ],
 })
 export class ExchangeWrapperModule { }

@@ -1,7 +1,7 @@
 import { Exchange } from "../enums/exchange";
 
 export class TickerDto {
-    readonly id: string;
+    readonly id: number;
     readonly exchange: Exchange;
     readonly symbol: string;
     readonly last: number;
