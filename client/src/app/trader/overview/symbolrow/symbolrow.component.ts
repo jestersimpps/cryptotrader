@@ -1,7 +1,10 @@
 import { OverviewService } from './../overview.service';
 import { Router } from '@angular/router';
 import { CurrencyPair } from './../../../models/currencypair.model';
-import { Component, OnInit, ViewChild, Input, ViewChildren, EventEmitter, QueryList, AfterViewInit, ElementRef, Output, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component, OnInit, ViewChild, Input, ViewChildren, EventEmitter,
+    QueryList, AfterViewInit, ElementRef, Output, ChangeDetectionStrategy
+} from '@angular/core';
 
 declare const jQuery: any;
 
@@ -10,7 +13,6 @@ declare const jQuery: any;
     templateUrl: './symbolrow.component.html',
     styleUrls: ['./symbolrow.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
-    
 })
 export class SymbolRowComponent implements AfterViewInit {
 
@@ -29,9 +31,13 @@ export class SymbolRowComponent implements AfterViewInit {
         this.drawCharts();
     }
 
+    setCurrencyPair() {
+        this.overviewService.setSelectedCurrencyPair(this.currencyPair);
+    }
+
     private drawCharts() {
-        let price: number[] = this.currencyPair.priceHistory.map(x => x.p);
-        let volume: number[] = this.currencyPair.priceHistory.map(x => x.v);
+        const price: number[] = this.currencyPair.priceHistory.map(x => x.p);
+        const volume: number[] = this.currencyPair.priceHistory.map(x => x.v);
 
         // Bar + line composite charts
         jQuery(this.chart.nativeElement).sparkline(volume, {
@@ -62,14 +68,12 @@ export class SymbolRowComponent implements AfterViewInit {
             tooltipFormat: 'Price: {{y:val}}',
 
         }).bind('sparklineClick', (ev: any) => {
-            let sparkline = ev.sparklines[1];
-            let region = sparkline.getCurrentRegionFields();
+            const sparkline = ev.sparklines[1];
+            const region = sparkline.getCurrentRegionFields();
             this.currencyPair.selectedPrice = region.y;
             this.setCurrencyPair();
         });
     }
 
-    setCurrencyPair() {
-        this.overviewService.setSelectedCurrencyPair(this.currencyPair);
-    }
+
 }

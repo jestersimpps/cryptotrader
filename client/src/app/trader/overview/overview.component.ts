@@ -16,14 +16,14 @@ export class OverviewComponent implements OnInit {
   selectedCurrencyPair: CurrencyPair;
   isLoading: boolean;
 
+  @ViewChild(`start`) leftSidePanel: MdSidenav;
+  @ViewChild(`end`) rightSidePanel: MdSidenav;
+
   constructor(
     private overviewService: OverviewService,
     private activatedRoute: ActivatedRoute) {
     this.isLoading = false;
   }
-
-  @ViewChild(`start`) leftSidePanel: MdSidenav;
-  @ViewChild(`end`) rightSidePanel: MdSidenav;
 
   ngOnInit() {
     this.overviewService.selectedCurrencyPairChange.subscribe((selectedCurrencyPair: CurrencyPair) => {
@@ -31,7 +31,7 @@ export class OverviewComponent implements OnInit {
       this.rightSidePanel.open();
     });
     this.activatedRoute.params.subscribe(params => {
-      let exchange = params['exchange'];
+      const exchange = params['exchange'];
       this.reloadPairs(exchange);
     });
   }
