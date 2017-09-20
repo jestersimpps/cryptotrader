@@ -4,11 +4,13 @@ import { Observable } from 'rxjs/Observable';
 import { Component, Get, Req } from '@nestjs/common';
 import { RxHttpRequest } from 'rx-http-request';
 import { ApiWrapper } from './api.wrapper';
+import { Exchange } from '../../../../common/enums/exchange';
 
 @Component()
 export class PoloniexWrapper extends ApiWrapper {
 
     apiEndpoint: string = `https://poloniex.com/public`;
+    exchange: Exchange = Exchange.poloniex;
 
     getTicker(): Observable<TickerDto[]> {
         let url = this.composeUrl(`returnTicker`);
@@ -20,6 +22,7 @@ export class PoloniexWrapper extends ApiWrapper {
                     Object.keys(body).forEach((key, index) => {
                         pairs.push({
                             id: body[key].id,
+                            exchange: this.exchange,
                             symbol: key,
                             last: body[key].last,
                             lowestAsk: body[key].lowestAsk,
