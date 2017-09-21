@@ -28,13 +28,13 @@ export class PoloniexWrapper extends ApiWrapper {
                             lowestAsk: body[key].lowestAsk,
                             highestBid: body[key].highestBid,
                             percentChange: body[key].percentChange,
-                            base: key.split(`_`)[0],
-                            quote: key.split(`_`)[1],
-                            baseVolume: body[key].baseVolume,
-                            quoteVolume: body[key].quoteVolume,
+                            base: key.split(`_`)[1],
+                            quote: key.split(`_`)[0],
+                            volume: body[key].baseVolume,
                             isFrozen: body[key].isFrozen == 0 ? false : true,
                             high24hr: body[key].high24hr,
-                            low24hr: body[key].low24hr
+                            low24hr: body[key].low24hr,
+                            updated: Date.now(),
                         });
                     });
                     return pairs;

@@ -17,18 +17,22 @@ export class KrakenWrapper extends ApiWrapper {
         return RxHttpRequest.get(assetPairsUrl, {})
             .map((data) => {
                 if (data.response.statusCode === 200) {
-                    const pairs: string[] = [];
+                    const pairs: { key: string; base: string; quote: string; }[] = [];
                     const body = data.response.body.json().result;
                     Object.keys(body).forEach((key, index) => {
-                        pairs.push(key);
+                        pairs.push({
+                            key: key,
+                            base: body[key].base,
+                            quote: body[key].quote
+                        });
                     });
                     return pairs;
                 } else {
                     // TODO: error handling
                     return [];
                 }
-            }).switchMap((pairs: string[]) => {
-                const tickerUrl = this.composeUrl(`Ticker?pair=${pairs.join(',')}`);
+            }).switchMap((pairs: { key: string; base: string; quote: string; }[]) => {
+                const tickerUrl = this.composeUrl(`Ticker?pair=${pairs.map(p => p.key).join(',')}`);
                 return RxHttpRequest.get(tickerUrl, {})
                     .map((data) => {
                         if (data.response.statusCode === 200) {
@@ -42,14 +46,14 @@ export class KrakenWrapper extends ApiWrapper {
                                     last: body[key].c[0],
                                     lowestAsk: body[key].a[0],
                                     highestBid: body[key].b[0],
-                                    percentChange: (body[key].o - body[key].c[0]) / body[key].o,
-                                    base: key.split(`_`)[0],
-                                    quote: key.split(`_`)[1],
-                                    baseVolume: body[key].v[0],
-                                    quoteVolume: body[key].v[0],
+                                    percentChange: +Number((body[key].o - body[key].c[0]) / body[key].o).toFixed(8),
+                                    base: pairs.find(p=>p.key == key).base,
+                                    quote: pairs.find(p=>p.key == key).quote,
+                                    volume: body[key].v[0],
                                     isFrozen: false,
                                     high24hr: body[key].h[0],
-                                    low24hr: body[key].l[0]
+                                    low24hr: body[key].l[0],
+                                    updated: Date.now(),
                                 });
                             });
                             return tickers;
@@ -60,5 +64,6 @@ export class KrakenWrapper extends ApiWrapper {
                     })
             });
     }
+
 
 }

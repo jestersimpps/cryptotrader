@@ -10,10 +10,10 @@ export class TickerDto {
     readonly percentChange: number;
     readonly quote: string;
     readonly base: string;
-    readonly baseVolume: number;
-    readonly quoteVolume: number;
+    readonly volume: number;
     readonly isFrozen: boolean;
     readonly high24hr: number;
     readonly low24hr: number;
+    readonly updated: number;
 }
 
