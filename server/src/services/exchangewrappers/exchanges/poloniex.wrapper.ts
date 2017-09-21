@@ -14,33 +14,32 @@ export class PoloniexWrapper extends ApiWrapper {
 
     getTicker(): Observable<TickerDto[]> {
         let url = this.composeUrl(`returnTicker`);
-        return RxHttpRequest.get(url, {})
-            .map((data) => {
-                if (data.response.statusCode === 200) {
-                    const pairs: TickerDto[] = [];
-                    const body = data.response.body.json();
-                    Object.keys(body).forEach((key, index) => {
-                        pairs.push({
-                            exchange: this.exchange,
-                            symbol: key,
-                            last: body[key].last,
-                            ask: body[key].lowestAsk,
-                            bid: body[key].highestBid,
-                            percentChange: body[key].percentChange,
-                            base: key.split(`_`)[1],
-                            quote: key.split(`_`)[0],
-                            volume: body[key].baseVolume,
-                            high: body[key].high24hr,
-                            low: body[key].low24hr,
-                            updated: Date.now(),
-                        });
+        return RxHttpRequest.get(url, {}).map((data) => {
+            if (data.response.statusCode === 200) {
+                const pairs: TickerDto[] = [];
+                const body = data.response.body.json();
+                Object.keys(body).forEach((key, index) => {
+                    pairs.push({
+                        exchange: this.exchange,
+                        symbol: key,
+                        last: body[key].last,
+                        ask: body[key].lowestAsk,
+                        bid: body[key].highestBid,
+                        percentChange: body[key].percentChange,
+                        base: key.split(`_`)[1],
+                        quote: key.split(`_`)[0],
+                        volume: body[key].baseVolume,
+                        high: body[key].high24hr,
+                        low: body[key].low24hr,
+                        updated: Date.now(),
                     });
-                    return pairs;
-                } else {
-                    // TODO: error handling
-                    return [];
-                }
-            });
+                });
+                return pairs;
+            } else {
+                // TODO: error handling
+                return [];
+            }
+        });
     }
 
 }

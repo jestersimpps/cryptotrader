@@ -1,3 +1,4 @@
+import { TickerDto } from './../../../common/dtos/ticker.model';
 import { BitfinexWrapper } from './exchangewrappers/exchanges/bitfinex.wrapper';
 import { BittrexWrapper } from './exchangewrappers/exchanges/bittrex.wrapper';
 import { PoloniexWrapper } from './exchangewrappers/exchanges/poloniex.wrapper';
