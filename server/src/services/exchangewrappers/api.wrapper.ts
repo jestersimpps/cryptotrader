@@ -8,13 +8,13 @@ import { RxHttpRequest } from 'rx-http-request';
 @Component()
 export abstract class ApiWrapper {
 
-    abstract publicEndpoint: string;
+    abstract publicEndpoints: string[];
     abstract exchange: Exchange;
 
     abstract getTicker(): Observable<TickerDto[]>
 
-    protected composeUrl(command: string) {
-        return `${this.publicEndpoint}${command}`;
+    protected composeUrl(command: string, endPointId: number = 0) {
+        return `${this.publicEndpoints[endPointId]}${command}`;
     }
 }
 

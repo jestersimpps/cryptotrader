@@ -1,11 +1,11 @@
 import { ExchangeWrapperModule } from './../services/exchangewrappers/exchangewrappers.module';
 import { ExchangeService } from './../services/exchange.service';
-import { OverviewController } from './../controllers/overview.controller';
+import { ExchangeController } from './../controllers/exchange.controller';
 import { Module } from '@nestjs/common';
 import { String } from './../../../common/extensionmethods/string'
 
 @Module({
-    controllers: [OverviewController],
+    controllers: [ExchangeController],
     components: [
         ExchangeService,
     ],

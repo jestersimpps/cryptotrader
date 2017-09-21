@@ -1,20 +1,20 @@
-import { TickerDto } from './../../../../common/dtos/ticker.model';
+import { TickerDto } from './../../../../../common/dtos/ticker.model';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Observable } from 'rxjs/Observable';
 import { Component, Get, Req } from '@nestjs/common';
 import { RxHttpRequest } from 'rx-http-request';
-import { ApiWrapper } from './api.wrapper';
-import { Exchange } from '../../../../common/enums/exchange';
+import { ApiWrapper } from './../api.wrapper';
+import { Exchange } from '../../../../../common/enums/exchange';
 
 @Component()
 export class BittrexWrapper extends ApiWrapper {
 
-    publicEndpoint: string = `https://bittrex.com/api/v1.1/public/`;
-    exchange: Exchange = Exchange.bittrex;
+    publicEndpoints = [`https://bittrex.com/api/v1.1/public/`];
+    exchange = Exchange.bittrex;
 
     getTicker(): Observable<TickerDto[]> {
-        const assetPairsUrl = this.composeUrl(`getmarketsummaries`);
-        return RxHttpRequest.get(assetPairsUrl, {})
+        const url = this.composeUrl(`getmarketsummaries`);
+        return RxHttpRequest.get(url, {})
             .map((data) => {
                 if (data.response.statusCode === 200) {
                     const pairs: TickerDto[] = [];

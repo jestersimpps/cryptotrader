@@ -1,16 +1,16 @@
-import { TickerDto } from './../../../../common/dtos/ticker.model';
+import { TickerDto } from './../../../../../common/dtos/ticker.model';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Observable } from 'rxjs/Observable';
 import { Component, Get, Req } from '@nestjs/common';
 import { RxHttpRequest } from 'rx-http-request';
-import { ApiWrapper } from './api.wrapper';
-import { Exchange } from '../../../../common/enums/exchange';
+import { ApiWrapper } from './../api.wrapper';
+import { Exchange } from '../../../../../common/enums/exchange';
 
 @Component()
 export class KrakenWrapper extends ApiWrapper {
 
-    publicEndpoint: string = `https://api.kraken.com/0/public/`;
-    exchange: Exchange = Exchange.kraken;
+    publicEndpoints = [`https://api.kraken.com/0/public/`];
+    exchange = Exchange.kraken;
 
     getTicker(): Observable<TickerDto[]> {
         const assetPairsUrl = this.composeUrl(`AssetPairs`);
@@ -46,8 +46,8 @@ export class KrakenWrapper extends ApiWrapper {
                                     ask: body[key].a[0],
                                     bid: body[key].b[0],
                                     percentChange: +Number((body[key].o - body[key].c[0]) / body[key].o).toFixed(8),
-                                    base: pairs.find(p=>p.key == key).base,
-                                    quote: pairs.find(p=>p.key == key).quote,
+                                    base: pairs.find(p => p.key == key).base,
+                                    quote: pairs.find(p => p.key == key).quote,
                                     volume: body[key].v[0],
                                     high: body[key].h[0],
                                     low: body[key].l[0],

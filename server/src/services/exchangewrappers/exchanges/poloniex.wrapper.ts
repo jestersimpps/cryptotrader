@@ -1,16 +1,16 @@
-import { TickerDto } from './../../../../common/dtos/ticker.model';
+import { TickerDto } from './../../../../../common/dtos/ticker.model';
 import { Subscriber } from 'rxjs/Subscriber';
 import { Observable } from 'rxjs/Observable';
 import { Component, Get, Req } from '@nestjs/common';
 import { RxHttpRequest } from 'rx-http-request';
-import { ApiWrapper } from './api.wrapper';
-import { Exchange } from '../../../../common/enums/exchange';
+import { ApiWrapper } from './../api.wrapper';
+import { Exchange } from '../../../../../common/enums/exchange';
 
 @Component()
 export class PoloniexWrapper extends ApiWrapper {
 
-    publicEndpoint: string = `https://poloniex.com/public?command=`;
-    exchange: Exchange = Exchange.poloniex;
+    publicEndpoints = [`https://poloniex.com/public?command=`];
+    exchange = Exchange.poloniex;
 
     getTicker(): Observable<TickerDto[]> {
         let url = this.composeUrl(`returnTicker`);

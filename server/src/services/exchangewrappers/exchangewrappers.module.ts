@@ -1,7 +1,8 @@
-import { BittrexWrapper } from './bittrex.wrapper';
-import { KrakenWrapper } from './kraken.wrapper';
+import { BitfinexWrapper } from './exchanges/bitfinex.wrapper';
+import { BittrexWrapper } from './exchanges/bittrex.wrapper';
+import { KrakenWrapper } from './exchanges/kraken.wrapper';
 import { Module } from '@nestjs/common';
-import { PoloniexWrapper } from './poloniex.wrapper';
+import { PoloniexWrapper } from './exchanges/poloniex.wrapper';
 import { ApiWrapper } from './api.wrapper';
 
 @Module({
@@ -9,12 +10,14 @@ import { ApiWrapper } from './api.wrapper';
         ApiWrapper,
         PoloniexWrapper,
         KrakenWrapper,
-        BittrexWrapper
+        BittrexWrapper,
+        BitfinexWrapper
     ],
     exports: [
         PoloniexWrapper,
         KrakenWrapper,
-        BittrexWrapper
+        BittrexWrapper,
+        BitfinexWrapper
     ],
 })
 export class ExchangeWrapperModule { }
