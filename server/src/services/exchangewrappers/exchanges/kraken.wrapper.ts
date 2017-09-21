@@ -17,7 +17,7 @@ export class KrakenWrapper extends ApiWrapper {
         return RxHttpRequest.get(assetPairsUrl, {}).map((data) => {
             if (data.response.statusCode === 200) {
                 const pairs: { key: string; base: string; quote: string; }[] = [];
-                const body = data.response.body.json().result;
+                const body = JSON.parse(data.response.body).result;
                 Object.keys(body).forEach((key, index) => {
                     pairs.push({
                         key: key,
@@ -35,7 +35,7 @@ export class KrakenWrapper extends ApiWrapper {
             return RxHttpRequest.get(tickerUrl, {}).map((data) => {
                 if (data.response.statusCode === 200) {
                     const tickers: TickerDto[] = [];
-                    const body = data.response.body.json().result;
+                    const body = JSON.parse(data.response.body).result;
                     Object.keys(body).forEach((key, index) => {
                         tickers.push({
                             exchange: this.exchange,

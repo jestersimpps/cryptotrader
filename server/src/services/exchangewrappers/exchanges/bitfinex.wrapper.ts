@@ -18,7 +18,7 @@ export class BitfinexWrapper extends ApiWrapper {
         const assetPairsUrl = this.composeUrl(`symbols`, 0);
         return RxHttpRequest.get(assetPairsUrl, {}).map((data) => {
             if (data.response.statusCode === 200) {
-                return data.response.body.json();
+                return JSON.parse(data.response.body);
             } else {
                 // TODO: error handling
                 return [];
@@ -29,7 +29,7 @@ export class BitfinexWrapper extends ApiWrapper {
             return RxHttpRequest.get(tickerUrl, {}).map((data) => {
                 if (data.response.statusCode === 200) {
                     const tickers: TickerDto[] = [];
-                    const body = data.response.body.json();
+                    const body = JSON.parse(data.response.body);
                     body.forEach((key, index) => {
                         tickers.push({
                             exchange: this.exchange,

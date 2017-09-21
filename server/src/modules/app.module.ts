@@ -1,4 +1,4 @@
-import { ExchangeWrapperModule } from './../services/exchangewrappers/exchangewrappers.module';
+import { ExchangeWrapperModule } from './exchangewrappers.module';
 import { ExchangeService } from './../services/exchange.service';
 import { ExchangeController } from './../controllers/exchange.controller';
 import { Module } from '@nestjs/common';

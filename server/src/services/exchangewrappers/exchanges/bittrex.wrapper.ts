@@ -17,7 +17,7 @@ export class BittrexWrapper extends ApiWrapper {
         return RxHttpRequest.get(url, {}).map((data) => {
             if (data.response.statusCode === 200) {
                 const pairs: TickerDto[] = [];
-                const body = data.response.body.json().result;
+                const body = JSON.parse(data.response.body).result;
                 body.forEach((key, index) => {
                     pairs.push({
                         exchange: this.exchange,
