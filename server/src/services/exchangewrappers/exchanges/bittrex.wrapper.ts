@@ -22,15 +22,15 @@ export class BittrexWrapper extends ApiWrapper {
                     pairs.push({
                         exchange: this.exchange,
                         symbol: key.MarketName,
-                        last: key.Last,
-                        ask: key.Ask,
-                        bid: key.Bid,
+                        last: +key.Last,
+                        ask: +key.Ask,
+                        bid: +key.Bid,
                         percentChange: +Number((key.PrevDay - key.Last) / key.PrevDay).toFixed(8),
                         base: key.MarketName.split(`-`)[1],
                         quote: key.MarketName.split(`-`)[0],
-                        volume: key.BaseVolume,
-                        high: key.High,
-                        low: key.Low,
+                        volume: +key.BaseVolume,
+                        high: +key.High,
+                        low: +key.Low,
                         updated: Date.now(),
                     });
                 });

@@ -22,15 +22,15 @@ export class PoloniexWrapper extends ApiWrapper {
                     pairs.push({
                         exchange: this.exchange,
                         symbol: key,
-                        last: body[key].last,
-                        ask: body[key].lowestAsk,
-                        bid: body[key].highestBid,
-                        percentChange: body[key].percentChange,
+                        last: +body[key].last,
+                        ask: +body[key].lowestAsk,
+                        bid: +body[key].highestBid,
+                        percentChange: +body[key].percentChange,
                         base: key.split(`_`)[1],
                         quote: key.split(`_`)[0],
-                        volume: body[key].baseVolume,
-                        high: body[key].high24hr,
-                        low: body[key].low24hr,
+                        volume: +body[key].baseVolume,
+                        high: +body[key].high24hr,
+                        low: +body[key].low24hr,
                         updated: Date.now(),
                     });
                 });

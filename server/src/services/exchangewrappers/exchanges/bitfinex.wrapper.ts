@@ -34,15 +34,15 @@ export class BitfinexWrapper extends ApiWrapper {
                         tickers.push({
                             exchange: this.exchange,
                             symbol: key[BitfinexTicker.SYMBOL].substring(1, 7),
-                            last: key[BitfinexTicker.LAST_PRICE],
-                            ask: key[BitfinexTicker.ASK],
-                            bid: key[BitfinexTicker.BID],
-                            percentChange: key[BitfinexTicker.DAILY_CHANGE_PERC],
+                            last: +key[BitfinexTicker.LAST_PRICE],
+                            ask: +key[BitfinexTicker.ASK],
+                            bid: +key[BitfinexTicker.BID],
+                            percentChange: +key[BitfinexTicker.DAILY_CHANGE_PERC],
                             base: key[BitfinexTicker.SYMBOL].substring(1, 4),
                             quote: key[BitfinexTicker.SYMBOL].substring(4, 7),
-                            volume: key[BitfinexTicker.VOLUME],
-                            high: key[BitfinexTicker.HIGH],
-                            low: key[BitfinexTicker.LOW],
+                            volume: +key[BitfinexTicker.VOLUME],
+                            high: +key[BitfinexTicker.HIGH],
+                            low: +key[BitfinexTicker.LOW],
                             updated: Date.now(),
                         });
                     });
