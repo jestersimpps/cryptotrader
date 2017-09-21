@@ -40,19 +40,17 @@ export class KrakenWrapper extends ApiWrapper {
                             const body = data.response.body.json().result;
                             Object.keys(body).forEach((key, index) => {
                                 tickers.push({
-                                    id: index,
                                     exchange: this.exchange,
                                     symbol: key,
                                     last: body[key].c[0],
-                                    lowestAsk: body[key].a[0],
-                                    highestBid: body[key].b[0],
+                                    ask: body[key].a[0],
+                                    bid: body[key].b[0],
                                     percentChange: +Number((body[key].o - body[key].c[0]) / body[key].o).toFixed(8),
                                     base: pairs.find(p=>p.key == key).base,
                                     quote: pairs.find(p=>p.key == key).quote,
                                     volume: body[key].v[0],
-                                    isFrozen: false,
-                                    high24hr: body[key].h[0],
-                                    low24hr: body[key].l[0],
+                                    high: body[key].h[0],
+                                    low: body[key].l[0],
                                     updated: Date.now(),
                                 });
                             });

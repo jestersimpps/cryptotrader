@@ -21,19 +21,17 @@ export class PoloniexWrapper extends ApiWrapper {
                     const body = data.response.body.json();
                     Object.keys(body).forEach((key, index) => {
                         pairs.push({
-                            id: body[key].id,
                             exchange: this.exchange,
                             symbol: key,
                             last: body[key].last,
-                            lowestAsk: body[key].lowestAsk,
-                            highestBid: body[key].highestBid,
+                            ask: body[key].lowestAsk,
+                            bid: body[key].highestBid,
                             percentChange: body[key].percentChange,
                             base: key.split(`_`)[1],
                             quote: key.split(`_`)[0],
                             volume: body[key].baseVolume,
-                            isFrozen: body[key].isFrozen == 0 ? false : true,
-                            high24hr: body[key].high24hr,
-                            low24hr: body[key].low24hr,
+                            high: body[key].high24hr,
+                            low: body[key].low24hr,
                             updated: Date.now(),
                         });
                     });

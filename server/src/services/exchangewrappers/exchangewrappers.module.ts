@@ -1,3 +1,4 @@
+import { BittrexWrapper } from './bittrex.wrapper';
 import { KrakenWrapper } from './kraken.wrapper';
 import { Module } from '@nestjs/common';
 import { PoloniexWrapper } from './poloniex.wrapper';
@@ -7,11 +8,13 @@ import { ApiWrapper } from './api.wrapper';
     components: [
         ApiWrapper,
         PoloniexWrapper,
-        KrakenWrapper
+        KrakenWrapper,
+        BittrexWrapper
     ],
     exports: [
         PoloniexWrapper,
-        KrakenWrapper
+        KrakenWrapper,
+        BittrexWrapper
     ],
 })
 export class ExchangeWrapperModule { }
