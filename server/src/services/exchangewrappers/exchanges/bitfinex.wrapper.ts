@@ -5,7 +5,7 @@ import { Component, Get, Req } from '@nestjs/common';
 import { RxHttpRequest } from 'rx-http-request';
 import { ApiWrapper } from './../api.wrapper';
 import { Exchange } from '../../../../../common/enums/exchange';
-import { BitfinexTicker } from './bitfinexticker.enum';
+import { BitfinexTicker } from './../../../../../common/enums/bitfinexticker.enum';
 
 @Component()
 export class BitfinexWrapper extends ApiWrapper {
@@ -35,13 +35,13 @@ export class BitfinexWrapper extends ApiWrapper {
                             body.forEach((key, index) => {
                                 tickers.push({
                                     exchange: this.exchange,
-                                    symbol: key[BitfinexTicker.SYMBOL].substring(1,7),
+                                    symbol: key[BitfinexTicker.SYMBOL].substring(1, 7),
                                     last: key[BitfinexTicker.LAST_PRICE],
                                     ask: key[BitfinexTicker.ASK],
                                     bid: key[BitfinexTicker.BID],
                                     percentChange: key[BitfinexTicker.DAILY_CHANGE_PERC],
-                                    base: key[BitfinexTicker.SYMBOL].substring(1,4),
-                                    quote: key[BitfinexTicker.SYMBOL].substring(4,7),
+                                    base: key[BitfinexTicker.SYMBOL].substring(1, 4),
+                                    quote: key[BitfinexTicker.SYMBOL].substring(4, 7),
                                     volume: key[BitfinexTicker.VOLUME],
                                     high: key[BitfinexTicker.HIGH],
                                     low: key[BitfinexTicker.LOW],
