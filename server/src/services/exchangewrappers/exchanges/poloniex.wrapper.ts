@@ -44,7 +44,7 @@ export class PoloniexWrapper extends ApiWrapper {
     }
 
 
-    getOhlc(period: HistoryPeriod): Observable<any[]> {
+    getOhlc(params: { exchange: Exchange, base: string, quote: string, period: HistoryPeriod, limit: number }): Observable<any[]> {
         return Observable.of([]);
     }
 }

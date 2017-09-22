@@ -57,7 +57,9 @@ export class BitfinexWrapper extends ApiWrapper {
     }
 
 
-    getOhlc(period: HistoryPeriod): Observable<any[]> {
+    getOhlc(params: { exchange: Exchange, base: string, quote: string, period: HistoryPeriod, limit: number }): Observable<any[]> {
+        const url = `https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=60&aggregate=3&e=Kraken`
+
         return Observable.of([]);
     }
 
