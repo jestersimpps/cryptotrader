@@ -21,8 +21,8 @@ export class KrakenWrapper extends ApiWrapper {
                 Object.keys(body).forEach((key, index) => {
                     pairs.push({
                         key: key,
-                        base: body[key].base,
-                        quote: body[key].quote
+                        base: key.length > 7 ? body[key].base.substring(1) : body[key].base,
+                        quote: key.length > 7 ? body[key].quote.substring(1) : body[key].quote
                     });
                 });
                 return pairs;
@@ -59,6 +59,10 @@ export class KrakenWrapper extends ApiWrapper {
                 }
             })
         });
+    }
+
+    getOhlc(): Observable<any[]> {
+        return Observable.of([]);
     }
 
 

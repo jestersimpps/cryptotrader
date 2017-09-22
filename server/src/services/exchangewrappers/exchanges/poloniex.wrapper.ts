@@ -42,6 +42,10 @@ export class PoloniexWrapper extends ApiWrapper {
         });
     }
 
+
+    getOhlc(): Observable<any[]> {
+        return Observable.of([]);
+    }
 }
 
 

@@ -56,4 +56,9 @@ export class BitfinexWrapper extends ApiWrapper {
     }
 
 
+    getOhlc(): Observable<any[]> {
+        return Observable.of([]);
+    }
+
+
 }
