@@ -14,7 +14,8 @@ export class PoloniexWrapper extends ApiWrapper {
     exchange = Exchange.poloniex;
 
     getTicker(): Observable<TickerDto[]> {
-        let url = this.composeUrl(`returnTicker`);
+        const url = this.composeUrl(`returnTicker`);
+        //TODO: create request delegate in apiwrapper
         return RxHttpRequest.get(url, {}).map((data) => {
             if (data.response.statusCode === 200) {
                 const pairs: TickerDto[] = [];
@@ -45,7 +46,16 @@ export class PoloniexWrapper extends ApiWrapper {
 
 
     getOhlc(params: { exchange: Exchange, base: string, quote: string, period: HistoryPeriod, limit: number }): Observable<any[]> {
-        return Observable.of([]);
+        //TODO: split up according to period
+        const url = `https://min-api.cryptocompare.com/data/histominute?fsym=${params.base}&tsym=${params.quote}&limit=${params.limit}&e=${params.exchange}`;
+        return RxHttpRequest.get(url, {}).map((data) => {
+            //TODO: create DTO for ohlc data
+            return JSON.parse(data.response.body).Data;
+        })
+
+        // https://min-api.cryptocompare.com/data/histominute?fsym=BTC&tsym=USD&limit=60&aggregate=3&e=CCCAGG,
+
+
     }
 }
 
