@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { Component, Get, Req } from '@nestjs/common';
 import { RxHttpRequest } from 'rx-http-request';
 import { ApiWrapper } from './../api.wrapper';
-import { Exchange } from '../../../../../common/enums/exchange';
+import { Exchange } from '../../../../../common/enums/exchange.enum';
+import { HistoryPeriod } from '../../../../../common/enums/period.enum';
 
 @Component()
 export class BittrexWrapper extends ApiWrapper {
@@ -42,7 +43,7 @@ export class BittrexWrapper extends ApiWrapper {
         })
     }
 
-    getOhlc(): Observable<any[]> {
+    getOhlc(period: HistoryPeriod): Observable<any[]> {
         return Observable.of([]);
     }
 

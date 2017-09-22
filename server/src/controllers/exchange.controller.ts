@@ -12,4 +12,9 @@ export class ExchangeController {
     getTicker( @Param() params): Observable<TickerDto[]> {
         return this.exchangeService.getTicker(params.exchange);
     }
+
+    @Get(':exchange/ohlc/:period')
+    getOhlc( @Param() params): Observable<TickerDto[]> {
+        return this.exchangeService.getOhlc(params.exchange, params.period);
+    }
 }

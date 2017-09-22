@@ -7,7 +7,8 @@ import { Subscriber } from 'rxjs/Subscriber';
 import { Observable } from 'rxjs/Observable';
 import { Component, Get, Req } from '@nestjs/common';
 import { RxHttpRequest } from 'rx-http-request';
-import { Exchange } from '../../../common/enums/exchange';
+import { Exchange } from '../../../common/enums/exchange.enum';
+import { HistoryPeriod } from '../../../common/enums/period.enum';
 
 @Component()
 export class ExchangeService {
@@ -19,7 +20,7 @@ export class ExchangeService {
         private bitfinexWrapper: BitfinexWrapper
     ) { }
 
-    getTicker(exchange): Observable<any[]> {
+    getTicker(exchange: Exchange): Observable<any[]> {
         switch (exchange) {
             case Exchange.poloniex:
                 return this.poloniexWrapper.getTicker();
@@ -29,6 +30,21 @@ export class ExchangeService {
                 return this.bittrexWrapper.getTicker();
             case Exchange.bitfinex:
                 return this.bitfinexWrapper.getTicker();
+            default:
+                return Observable.of([`${exchange} not yet implemented`]);
+        }
+    }
+
+    getOhlc(exchange: Exchange, period: HistoryPeriod) {
+        switch (exchange) {
+            case Exchange.poloniex:
+                return this.poloniexWrapper.getOhlc(period);
+            case Exchange.kraken:
+                return this.krakenWrapper.getOhlc(period);
+            case Exchange.bittrex:
+                return this.bittrexWrapper.getOhlc(period);
+            case Exchange.bitfinex:
+                return this.bitfinexWrapper.getOhlc(period);
             default:
                 return Observable.of([`${exchange} not yet implemented`]);
         }
