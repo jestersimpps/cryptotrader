@@ -8,7 +8,7 @@
         "start:watch": "nodemon",
         "prestart:prod": "tsc",
         "start:prod": "node dist/server/src/server.js",
-        "loaddata": "node dist/server/src/services/caching/loaddata.js"
+        "loaddata": "npm run prestart:prod && node dist/server/src/services/caching/loaddata.js"
     },
     "dependencies": {
         "@nestjs/common": "^4.0.0",
