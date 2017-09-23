@@ -15,7 +15,7 @@ export class BitfinexWrapper extends ApiWrapper {
     exchange = Exchange.bitfinex;
 
     getTicker(): Observable<TickerDto[]> {
-        //symbols only available in v1
+        // symbols only available in v1
         const assetPairsUrl = this.composeUrl(`symbols`, 0);
         return RxHttpRequest.get(assetPairsUrl, {}).map((data) => {
             if (data.response.statusCode === 200) {
@@ -25,7 +25,7 @@ export class BitfinexWrapper extends ApiWrapper {
                 return [];
             }
         }).switchMap((pairs: string[]) => {
-            //using api v2 to fetch multiple symbols at once
+            // using api v2 to fetch multiple symbols at once
             const tickerUrl = this.composeUrl(`tickers?symbols=${pairs.map(p => `t${p.toUpperCase()}`).join(',')}`, 1);
             return RxHttpRequest.get(tickerUrl, {}).map((data) => {
                 if (data.response.statusCode === 200) {
@@ -52,14 +52,11 @@ export class BitfinexWrapper extends ApiWrapper {
                     // TODO: error handling
                     return [];
                 }
-            })
+            });
         });
     }
-
 
     getOhlc(query: { base: string, quote: string, limit: number, period: HistoryPeriod }): Observable<any[]> {
         return this.queryOhlc(query);
     }
-
-
 }

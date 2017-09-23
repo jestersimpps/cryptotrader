@@ -9,7 +9,7 @@ async function bootstrap() {
   redisClient.on('error', function (err) {
     console.log("Redis Error: " + err);
   });
-  
+
   const app = await NestFactory.create(ApplicationModule);
   app.use(bodyParser.json());
   await app.listen(8080);

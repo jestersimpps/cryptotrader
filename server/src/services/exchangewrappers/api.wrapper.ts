@@ -47,10 +47,8 @@ export abstract class ApiWrapper {
                     l: ohlc.low,
                     v: ohlc.volumeto,
                     t: ohlc.time
-                }
+                };
             });
-        })
+        });
     }
 }
-
-

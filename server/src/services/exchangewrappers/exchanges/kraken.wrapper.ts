@@ -58,13 +58,11 @@ export class KrakenWrapper extends ApiWrapper {
                     // TODO: error handling
                     return [];
                 }
-            })
+            });
         });
     }
 
     getOhlc(query: { base: string, quote: string, limit: number, period: HistoryPeriod }): Observable<any[]> {
         return this.queryOhlc(query);
     }
-
-
 }

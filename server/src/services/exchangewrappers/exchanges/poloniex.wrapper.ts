@@ -49,5 +49,3 @@ export class PoloniexWrapper extends ApiWrapper {
         return this.queryOhlc(query);
     }
 }
-
-
