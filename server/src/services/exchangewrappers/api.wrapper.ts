@@ -22,6 +22,7 @@ export abstract class ApiWrapper {
 
     protected queryOhlc(query: { base: string, quote: string, limit: number, period: HistoryPeriod }) {
         let url: string;
+        query.limit != undefined ? query.limit : query.limit = 24;
         switch (query.period) {
             case HistoryPeriod.day:
                 url = `https://min-api.cryptocompare.com/data/histoday?fsym=${query.base}&tsym=${query.quote}&limit=${query.limit}&e=${this.exchange}`;
