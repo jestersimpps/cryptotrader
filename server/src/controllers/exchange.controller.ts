@@ -17,7 +17,6 @@ export class ExchangeController {
 
     @Get(':exchange/ohlc')
     getOhlc( @Param() params: { exchange: Exchange }, @Query() query: { base: string, quote: string, limit: number, period: HistoryPeriod }): Observable<TickerDto[]> {
-        console.log(query);
         return this.exchangeService.getOhlc(params.exchange, query);
     }
 }
