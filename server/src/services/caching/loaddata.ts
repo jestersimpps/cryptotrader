@@ -15,7 +15,7 @@ async function loadData() {
     const bittrexWrapper = new BittrexWrapper();
     const bitfinexWrapper = new BitfinexWrapper();
 
-    var tasks$ = [];
+    let tasks$ = [];
 
     tasks$.push(poloniexWrapper.getTicker().do(() => console.log(`loaded ${Exchange.poloniex} ticker data.`)));
     tasks$.push(krakenWrapper.getTicker().do(() => console.log(`loaded ${Exchange.kraken} ticker data.`)));
