@@ -17,7 +17,7 @@ export class BittrexWrapper extends ApiWrapper {
         const url = this.composeUrl(`getmarketsummaries`);
         return RxHttpRequest.get(url, {}).map((data) => {
             if (data.response.statusCode === 200) {
-                const pairs: TickerDto[] = [];
+                let pairs: TickerDto[] = [];
                 const body = JSON.parse(data.response.body).result;
                 body.forEach((key, index) => {
                     pairs.push({
@@ -43,8 +43,8 @@ export class BittrexWrapper extends ApiWrapper {
         })
     }
 
-    getOhlc(params: { exchange: Exchange, base: string, quote: string, period: HistoryPeriod, limit: number }): Observable<any[]> {
-        return Observable.of([]);
+    getOhlc(query: { base: string, quote: string, limit: number, period: HistoryPeriod }): Observable<any[]> {
+        return this.queryOhlc(query);
     }
 
 }

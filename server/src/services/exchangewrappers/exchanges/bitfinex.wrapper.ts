@@ -29,7 +29,7 @@ export class BitfinexWrapper extends ApiWrapper {
             const tickerUrl = this.composeUrl(`tickers?symbols=${pairs.map(p => `t${p.toUpperCase()}`).join(',')}`, 1);
             return RxHttpRequest.get(tickerUrl, {}).map((data) => {
                 if (data.response.statusCode === 200) {
-                    const tickers: TickerDto[] = [];
+                    let tickers: TickerDto[] = [];
                     const body = JSON.parse(data.response.body);
                     body.forEach((key, index) => {
                         tickers.push({
@@ -57,10 +57,8 @@ export class BitfinexWrapper extends ApiWrapper {
     }
 
 
-    getOhlc(params: { exchange: Exchange, base: string, quote: string, period: HistoryPeriod, limit: number }): Observable<any[]> {
-        const url = `https://min-api.cryptocompare.com/data/histominute?fsym=ETH&tsym=USD&limit=60&aggregate=3&e=Kraken`
-
-        return Observable.of([]);
+    getOhlc(query: { base: string, quote: string, limit: number, period: HistoryPeriod }): Observable<any[]> {
+        return this.queryOhlc(query);
     }
 
 

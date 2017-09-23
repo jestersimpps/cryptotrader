@@ -35,18 +35,18 @@ export class ExchangeService {
         }
     }
 
-    getOhlc(params: { exchange: Exchange, base: string, quote: string, period: HistoryPeriod, limit: number }) {
-        switch (params.exchange) {
+    getOhlc(exchange: Exchange, query: { base: string, quote: string, limit: number, period: HistoryPeriod }) {
+        switch (exchange) {
             case Exchange.poloniex:
-                return this.poloniexWrapper.getOhlc(params);
+                return this.poloniexWrapper.getOhlc(query);
             case Exchange.kraken:
-                return this.krakenWrapper.getOhlc(params);
+                return this.krakenWrapper.getOhlc(query);
             case Exchange.bittrex:
-                return this.bittrexWrapper.getOhlc(params);
+                return this.bittrexWrapper.getOhlc(query);
             case Exchange.bitfinex:
-                return this.bitfinexWrapper.getOhlc(params);
+                return this.bitfinexWrapper.getOhlc(query);
             default:
-                return Observable.of([`${params.exchange} not yet implemented`]);
+                return Observable.of([`${exchange} not yet implemented`]);
         }
     }
 }

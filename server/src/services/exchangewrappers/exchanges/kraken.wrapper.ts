@@ -17,7 +17,7 @@ export class KrakenWrapper extends ApiWrapper {
         const assetPairsUrl = this.composeUrl(`AssetPairs`);
         return RxHttpRequest.get(assetPairsUrl, {}).map((data) => {
             if (data.response.statusCode === 200) {
-                const pairs: { key: string; base: string; quote: string; }[] = [];
+                let pairs: { key: string; base: string; quote: string; }[] = [];
                 const body = JSON.parse(data.response.body).result;
                 Object.keys(body).forEach((key, index) => {
                     pairs.push({
@@ -35,7 +35,7 @@ export class KrakenWrapper extends ApiWrapper {
             const tickerUrl = this.composeUrl(`Ticker?pair=${pairs.map(p => p.key).join(',')}`);
             return RxHttpRequest.get(tickerUrl, {}).map((data) => {
                 if (data.response.statusCode === 200) {
-                    const tickers: TickerDto[] = [];
+                    let tickers: TickerDto[] = [];
                     const body = JSON.parse(data.response.body).result;
                     Object.keys(body).forEach((key, index) => {
                         tickers.push({
@@ -62,8 +62,8 @@ export class KrakenWrapper extends ApiWrapper {
         });
     }
 
-    getOhlc(params: { exchange: Exchange, base: string, quote: string, period: HistoryPeriod, limit: number }): Observable<any[]> {
-        return Observable.of([]);
+    getOhlc(query: { base: string, quote: string, limit: number, period: HistoryPeriod }): Observable<any[]> {
+        return this.queryOhlc(query);
     }
 
 
