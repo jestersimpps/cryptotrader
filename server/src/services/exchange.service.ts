@@ -9,27 +9,33 @@ import { Component, Get, Req } from '@nestjs/common';
 import { RxHttpRequest } from 'rx-http-request';
 import { Exchange } from '../../../common/enums/exchange.enum';
 import { HistoryPeriod } from '../../../common/enums/period.enum';
+import * as redis from 'redis';
+import { RedisClient } from 'redis';
 
 @Component()
 export class ExchangeService {
+
+    redisClient: RedisClient;
 
     constructor(
         private poloniexWrapper: PoloniexWrapper,
         private krakenWrapper: KrakenWrapper,
         private bittrexWrapper: BittrexWrapper,
         private bitfinexWrapper: BitfinexWrapper
-    ) { }
+    ) {
+        this.redisClient = redis.createClient();
+    }
 
-    getTicker(exchange: Exchange): Observable<any[]> {
+    getTicker(exchange: Exchange, fromCache: boolean): Observable<any[]> {
         switch (exchange) {
             case Exchange.poloniex:
-                return this.poloniexWrapper.getTicker();
+                return fromCache ? this.getFromCache(`${Exchange.poloniex}_ticker`) : this.poloniexWrapper.getTicker();
             case Exchange.kraken:
-                return this.krakenWrapper.getTicker();
+                return fromCache ? this.getFromCache(`${Exchange.poloniex}_ticker`) : this.krakenWrapper.getTicker();
             case Exchange.bittrex:
-                return this.bittrexWrapper.getTicker();
+                return fromCache ? this.getFromCache(`${Exchange.poloniex}_ticker`) : this.bittrexWrapper.getTicker();
             case Exchange.bitfinex:
-                return this.bitfinexWrapper.getTicker();
+                return fromCache ? this.getFromCache(`${Exchange.poloniex}_ticker`) : this.bitfinexWrapper.getTicker();
             default:
                 return Observable.of([`${exchange} not yet implemented`]);
         }
@@ -48,5 +54,21 @@ export class ExchangeService {
             default:
                 return Observable.of([`${exchange} not yet implemented`]);
         }
+    }
+
+    private getFromCache(cacheKey: string): Observable<any[]> {
+        // TODO: wip, fetch array according to cachekey
+        this.redisClient.get(cacheKey, (err, res) => {
+            if (!err) {
+                Object.keys(res).forEach((k) => {
+                    console.log('key is ' + k + ' value is ' + res[k]);
+                });
+                return Observable.of([]);
+            }
+            else {
+                return Observable.of([]);
+            }
+        });
+        return Observable.of([]);        
     }
 }

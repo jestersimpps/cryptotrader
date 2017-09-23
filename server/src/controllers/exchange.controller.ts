@@ -12,7 +12,7 @@ export class ExchangeController {
 
     @Get(':exchange/ticker')
     getTicker( @Param() params: { exchange: Exchange }): Observable<TickerDto[]> {
-        return this.exchangeService.getTicker(params.exchange);
+        return this.exchangeService.getTicker(params.exchange, true);
     }
 
     @Get(':exchange/ohlc')

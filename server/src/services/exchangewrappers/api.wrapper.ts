@@ -21,6 +21,7 @@ export abstract class ApiWrapper {
     }
 
     protected queryOhlc(query: { base: string, quote: string, limit: number, period: HistoryPeriod }) {
+        // TODO: adjust Exchange string to match exchange query param at cryptocompare. (bittrex => BitTrex, etc.)
         let url: string;
         query.limit != undefined ? query.limit : query.limit = 24;
         switch (query.period) {
