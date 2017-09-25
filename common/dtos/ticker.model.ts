@@ -1,3 +1,4 @@
+import { OhlcDto } from './ohlc.model';
 import { Exchange } from "../enums/exchange.enum";
 
 export class TickerDto {
@@ -13,5 +14,6 @@ export class TickerDto {
     readonly high: number;
     readonly low: number;
     readonly updated: number;
+    readonly ohlc: OhlcDto[];
 }
 

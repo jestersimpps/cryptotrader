@@ -51,6 +51,7 @@ export class KrakenWrapper extends ApiWrapper {
                             high: +body[key].h[0],
                             low: +body[key].l[0],
                             updated: Date.now(),
+                            ohlc: [],
                         });
                     });
                     return tickers;

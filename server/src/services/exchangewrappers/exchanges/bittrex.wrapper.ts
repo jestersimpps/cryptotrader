@@ -33,6 +33,7 @@ export class BittrexWrapper extends ApiWrapper {
                         high: +key.High,
                         low: +key.Low,
                         updated: Date.now(),
+                        ohlc: [],
                     });
                 });
                 return pairs;

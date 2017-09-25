@@ -45,6 +45,7 @@ export class BitfinexWrapper extends ApiWrapper {
                             high: +key[BitfinexTicker.HIGH],
                             low: +key[BitfinexTicker.LOW],
                             updated: Date.now(),
+                            ohlc: [],
                         });
                     });
                     return tickers;

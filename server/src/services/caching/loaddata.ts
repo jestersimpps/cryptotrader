@@ -17,6 +17,9 @@ async function loadData() {
 
     let tasks$ = [];
 
+    /**
+     * Load ticker data
+     */
     tasks$.push(poloniexWrapper.getTicker().do(() => console.log(`loaded ${Exchange.poloniex} ticker data.`)));
     tasks$.push(krakenWrapper.getTicker().do(() => console.log(`loaded ${Exchange.kraken} ticker data.`)));
     tasks$.push(bittrexWrapper.getTicker().do(() => console.log(`loaded ${Exchange.bittrex} ticker data.`)));
@@ -25,10 +28,18 @@ async function loadData() {
     Observable.forkJoin(...tasks$).subscribe(tickerData => {
         tickerData.forEach((ticker: TickerDto[]) => {
             redisClient.set(`${ticker[0].exchange}_ticker`, JSON.stringify(ticker));
+            // Adds latest ohlc data point to each individual pair;
+            addToOhlc(ticker);
             console.log(`set ${ticker[0].exchange} ticker data in redis cache.`);
         });
         process.exit();
     });
+
 }
+
+function addToOhlc(ticker: TickerDto[]) {
+
+}
+
 
 loadData();
