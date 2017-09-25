@@ -24,7 +24,7 @@ async function loadData() {
 
     Observable.forkJoin(...tasks$).subscribe(tickerData => {
         tickerData.forEach((ticker: TickerDto[]) => {
-            redisClient.set(`${ticker[0].exchange}_ticker`, JSON.stringify(tickerData));
+            redisClient.set(`${ticker[0].exchange}_ticker`, JSON.stringify(ticker));
             console.log(`set ${ticker[0].exchange} ticker data in redis cache.`);
         });
         process.exit();

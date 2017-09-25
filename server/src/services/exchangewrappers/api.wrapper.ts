@@ -23,19 +23,37 @@ export abstract class ApiWrapper {
     protected queryOhlc(query: { base: string, quote: string, limit: number, period: HistoryPeriod }) {
         // TODO: adjust Exchange string to match exchange query param at cryptocompare. (bittrex => BitTrex, etc.)
         let url: string;
-        query.limit != undefined ? query.limit : query.limit = 24;
-        switch (query.period) {
-            case HistoryPeriod.day:
-                url = `https://min-api.cryptocompare.com/data/histoday?fsym=${query.base}&tsym=${query.quote}&limit=${query.limit}&e=${this.exchange}`;
+        let exchange: string;
+        query.limit !== undefined ? query.limit : query.limit = 24;
+        switch (this.exchange) {
+            case Exchange.poloniex:
+                exchange = `Poloniex`;
                 break;
-            case HistoryPeriod.hour:
-                url = `https://min-api.cryptocompare.com/data/histohour?fsym=${query.base}&tsym=${query.quote}&limit=${query.limit}&e=${this.exchange}`;
+            case Exchange.kraken:
+                exchange = `Kraken`;
                 break;
-            case HistoryPeriod.minute:
-                url = `https://min-api.cryptocompare.com/data/histominute?fsym=${query.base}&tsym=${query.quote}&limit=${query.limit}&e=${this.exchange}`;
+            case Exchange.bittrex:
+                exchange = `BitTrex`;
+                break;
+            case Exchange.bitfinex:
+                exchange = `Bitfinex`;
                 break;
             default:
-                url = `https://min-api.cryptocompare.com/data/histohour?fsym=${query.base}&tsym=${query.quote}&limit=${query.limit}&e=${this.exchange}`;
+                exchange = ``;
+                break;
+        }
+        switch (query.period) {
+            case HistoryPeriod.day:
+                url = `https://min-api.cryptocompare.com/data/histoday?fsym=${query.base}&tsym=${query.quote}&limit=${query.limit}&e=${exchange}`;
+                break;
+            case HistoryPeriod.hour:
+                url = `https://min-api.cryptocompare.com/data/histohour?fsym=${query.base}&tsym=${query.quote}&limit=${query.limit}&e=${exchange}`;
+                break;
+            case HistoryPeriod.minute:
+                url = `https://min-api.cryptocompare.com/data/histominute?fsym=${query.base}&tsym=${query.quote}&limit=${query.limit}&e=${exchange}`;
+                break;
+            default:
+                url = `https://min-api.cryptocompare.com/data/histohour?fsym=${query.base}&tsym=${query.quote}&limit=${query.limit}&e=${exchange}`;
                 break;
         }
         return RxHttpRequest.get(url, {}).map((data) => {

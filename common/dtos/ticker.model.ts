@@ -1,4 +1,4 @@
-import { Exchange } from "../enums/exchange";
+import { Exchange } from "../enums/exchange.enum";
 
 export class TickerDto {
     readonly exchange: Exchange;

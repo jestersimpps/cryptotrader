@@ -9,13 +9,11 @@ import { Component, Get, Req } from '@nestjs/common';
 import { RxHttpRequest } from 'rx-http-request';
 import { Exchange } from '../../../common/enums/exchange.enum';
 import { HistoryPeriod } from '../../../common/enums/period.enum';
-import * as redis from 'redis';
-import { RedisClient } from 'redis';
 
 @Component()
 export class ExchangeService {
 
-    redisClient: RedisClient;
+    redisClient: any;
 
     constructor(
         private poloniexWrapper: PoloniexWrapper,
@@ -23,26 +21,27 @@ export class ExchangeService {
         private bittrexWrapper: BittrexWrapper,
         private bitfinexWrapper: BitfinexWrapper
     ) {
-        this.redisClient = redis.createClient();
+        const Redis = require('ioredis');
+        this.redisClient = require('rxredis')(new Redis());
     }
 
     getTicker(exchange: Exchange, fromCache: boolean): Observable<any[]> {
-        switch (exchange) {
+        switch (exchange.toLowerCase()) {
             case Exchange.poloniex:
                 return fromCache ? this.getFromCache(`${Exchange.poloniex}_ticker`) : this.poloniexWrapper.getTicker();
             case Exchange.kraken:
-                return fromCache ? this.getFromCache(`${Exchange.poloniex}_ticker`) : this.krakenWrapper.getTicker();
+                return fromCache ? this.getFromCache(`${Exchange.kraken}_ticker`) : this.krakenWrapper.getTicker();
             case Exchange.bittrex:
-                return fromCache ? this.getFromCache(`${Exchange.poloniex}_ticker`) : this.bittrexWrapper.getTicker();
+                return fromCache ? this.getFromCache(`${Exchange.bittrex}_ticker`) : this.bittrexWrapper.getTicker();
             case Exchange.bitfinex:
-                return fromCache ? this.getFromCache(`${Exchange.poloniex}_ticker`) : this.bitfinexWrapper.getTicker();
+                return fromCache ? this.getFromCache(`${Exchange.bitfinex}_ticker`) : this.bitfinexWrapper.getTicker();
             default:
                 return Observable.of([`${exchange} not yet implemented`]);
         }
     }
 
     getOhlc(exchange: Exchange, query: { base: string, quote: string, limit: number, period: HistoryPeriod }) {
-        switch (exchange) {
+        switch (exchange.toLowerCase()) {
             case Exchange.poloniex:
                 return this.poloniexWrapper.getOhlc(query);
             case Exchange.kraken:
@@ -57,18 +56,6 @@ export class ExchangeService {
     }
 
     private getFromCache(cacheKey: string): Observable<any[]> {
-        // TODO: wip, fetch array according to cachekey
-        this.redisClient.get(cacheKey, (err, res) => {
-            if (!err) {
-                Object.keys(res).forEach((k) => {
-                    console.log('key is ' + k + ' value is ' + res[k]);
-                });
-                return Observable.of([]);
-            }
-            else {
-                return Observable.of([]);
-            }
-        });
-        return Observable.of([]);        
+        return this.redisClient.get(cacheKey);
     }
 }
