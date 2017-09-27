@@ -35,7 +35,7 @@ export class PoloniexWrapper extends ApiWrapper {
                         high: +body[key].high24hr,
                         low: +body[key].low24hr,
                         updated: Date.now(),
-                        ohlc: [],
+                        history: [],
                     });
                 });
                 return pairs;
