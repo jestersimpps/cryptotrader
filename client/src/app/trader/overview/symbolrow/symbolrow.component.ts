@@ -1,6 +1,6 @@
+import { TickerDto } from './../../../../../../common/dtos/ticker.model';
 import { OverviewService } from './../overview.service';
 import { Router } from '@angular/router';
-import { CurrencyPair } from './../../../models/currencypair.model';
 import {
     Component, OnInit, ViewChild, Input, ViewChildren, EventEmitter,
     QueryList, AfterViewInit, ElementRef, Output, ChangeDetectionStrategy
@@ -16,7 +16,7 @@ declare const jQuery: any;
 })
 export class SymbolRowComponent implements AfterViewInit {
 
-    @Input() currencyPair: CurrencyPair;
+    @Input() currencyPair: TickerDto;
 
     @ViewChild('chart') chart: ElementRef;
 
@@ -36,8 +36,8 @@ export class SymbolRowComponent implements AfterViewInit {
     }
 
     private drawCharts() {
-        const price: number[] = this.currencyPair.priceHistory.map(x => x.p);
-        const volume: number[] = this.currencyPair.priceHistory.map(x => x.v);
+        const price: number[] = this.currencyPair.history.map(x => x.p);
+        const volume: number[] = this.currencyPair.history.map(x => x.v);
 
         // Bar + line composite charts
         jQuery(this.chart.nativeElement).sparkline(volume, {
@@ -70,7 +70,6 @@ export class SymbolRowComponent implements AfterViewInit {
         }).bind('sparklineClick', (ev: any) => {
             const sparkline = ev.sparklines[1];
             const region = sparkline.getCurrentRegionFields();
-            this.currencyPair.selectedPrice = region.y;
             this.setCurrencyPair();
         });
     }

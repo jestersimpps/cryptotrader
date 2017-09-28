@@ -1,6 +1,6 @@
+import { TickerDto } from './../../../../../../common/dtos/ticker.model';
 import { Observable } from 'rxjs/Rx'
 import { Input, Component, OnInit } from '@angular/core';
-import { CurrencyPair } from './../../../models/currencypair.model';
 import { SidepanelService } from 'app/trader/overview/sidepanel/sidepanel.service';
 
 @Component({
@@ -15,7 +15,7 @@ export class SidePanelComponent implements OnInit {
 
     currencyInfo: any;
 
-    @Input() currencyPair: CurrencyPair;
+    @Input() currencyPair: TickerDto;
 
     constructor(private sidepanelService: SidepanelService) {
 

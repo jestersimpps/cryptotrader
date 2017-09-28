@@ -1,4 +1,4 @@
-import { CurrencyPair } from './../../../../models/currencypair.model';
+import { TickerDto } from './../../../../../../../common/dtos/ticker.model';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class CryptoheaderComponent {
 
-  @Input() currencyPair: CurrencyPair;
+  @Input() currencyPair: TickerDto;
   @Input() currencyInfo: any;
 
   constructor(

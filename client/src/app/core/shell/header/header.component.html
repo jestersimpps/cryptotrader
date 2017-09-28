@@ -9,9 +9,9 @@
                 <li class="nav-item">
                     <a class="nav-link" [routerLink]="['/']"><i class="fa fa-dashboard"></i> <span translate>Dashboard</span></a>
                 </li>
-                <div class="nav-item" ngbDropdown>
-                    <a id="language-dropdown" class="nav-link" ngbDropdownToggle><i class="fa fa-table"></i>  <span translate>Exchange</span></a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="language-dropdown">
+                <div class="nav-item dropdown" ngbDropdown>
+                    <a id="exchange-dropdown" class="nav-link" ngbDropdownToggle><i class="fa fa-table"></i>  <span translate>Exchange</span></a>
+                    <div class="dropdown-menu" aria-labelledby="exchange-dropdown">
                         <button class="dropdown-item" *ngFor="let exchange of exchanges" [routerLink]="['/exchanges',exchange]" routerLinkActive="active">{{exchange}}</button>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-import { CurrencyPair } from './../../../models/currencypair.model';
+import { TickerDto } from './../../../../../../common/dtos/ticker.model';
 import { OverviewService } from './../overview.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, AfterViewInit, Input, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
@@ -9,7 +9,7 @@ declare const TradingView: any;
     templateUrl: './chart.component.html',
     styleUrls: ['./chart.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
-    
+
 })
 export class ChartComponent implements AfterViewInit {
 
@@ -24,11 +24,11 @@ export class ChartComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.overviewService.selectedCurrencyPairChange.subscribe((selectedCurrencyPair: CurrencyPair) => {
+        this.overviewService.selectedCurrencyPairChange.subscribe((selectedCurrencyPair: TickerDto) => {
             new TradingView.widget({
                 "container_id": "chart",
                 "autosize": true,
-                "symbol": `${selectedCurrencyPair.exchange}:${selectedCurrencyPair.base}${selectedCurrencyPair.quote}`,
+                "symbol": `${selectedCurrencyPair.percentChange}:${selectedCurrencyPair.base}${selectedCurrencyPair.quote}`,
                 "interval": "5",
                 "timezone": "Etc/UTC",
                 "theme": "Dark",
@@ -41,7 +41,6 @@ export class ChartComponent implements AfterViewInit {
                 "allow_symbol_change": true,
                 "show_popup_button": true
             });
-
         });
 
     }

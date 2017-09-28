@@ -13,7 +13,7 @@ export class KrakenWrapper extends ApiWrapper {
     publicEndpoints = [`https://api.kraken.com/0/public/`];
     exchange = Exchange.kraken;
 
-    getTicker(): Observable<TickerDto[]> {
+    getTickers(): Observable<TickerDto[]> {
         const assetPairsUrl = this.composeUrl(`AssetPairs`);
         return RxHttpRequest.get(assetPairsUrl, {}).map((data) => {
             if (data.response.statusCode === 200) {

@@ -14,7 +14,7 @@ export class BitfinexWrapper extends ApiWrapper {
     publicEndpoints = [`https://api.bitfinex.com/v1/`, `https://api.bitfinex.com/v2/`];
     exchange = Exchange.bitfinex;
 
-    getTicker(): Observable<TickerDto[]> {
+    getTickers(): Observable<TickerDto[]> {
         // symbols only available in v1
         const assetPairsUrl = this.composeUrl(`symbols`, 0);
         return RxHttpRequest.get(assetPairsUrl, {}).map((data) => {

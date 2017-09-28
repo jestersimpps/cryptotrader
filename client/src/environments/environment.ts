@@ -6,7 +6,7 @@
 export const environment = {
   production: false,
   version: '(dev)',
-  serverUrl: 'http://localhost:8000/',
+  serverUrl: 'http://localhost:8080/',
   defaultLanguage: 'en-US',
   supportedLanguages: [
     'en-US',

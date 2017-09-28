@@ -1,4 +1,4 @@
-import { CurrencyPair } from './../../../models/currencypair.model';
+import { TickerDto } from './../../../../../../common/dtos/ticker.model';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -15,7 +15,8 @@ export class SidepanelService {
 
     constructor(private http: Http) { }
 
-    getTradingPair(currencyPair: CurrencyPair): Observable<any> {
+    getTradingPair(currencyPair: TickerDto): Observable<any> {
+        // tslint:disable-next-line:max-line-length
         return this.http.get(routes.tradingPair(currencyPair.exchange, currencyPair.base, currencyPair.quote), { cache: false })
             .map((res: Response) => res.json())
             .catch(() => Observable.of('Error, could not load CurrencyPair.'));

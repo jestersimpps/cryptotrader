@@ -11,6 +11,11 @@ export class ExchangeController {
     constructor(private exchangeService: ExchangeService) { }
 
     @Get(':exchange/ticker')
+    getTickers( @Param() params: { exchange: Exchange }): Observable<TickerDto[]> {
+        return this.exchangeService.getTickers(params.exchange, true);
+    }
+
+    @Get(':exchange/ticker')
     getTicker( @Param() params: { exchange: Exchange }): Observable<TickerDto[]> {
         return this.exchangeService.getTicker(params.exchange, true);
     }

@@ -1,4 +1,4 @@
-import { CurrencyPair } from './../../../../models/currencypair.model';
+import { TickerDto } from './../../../../../../../common/dtos/ticker.model';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TradehistoryComponent implements OnInit {
 
-  @Input() currencyPair: CurrencyPair;
+  @Input() currencyPair: TickerDto;
 
   constructor() { }
 

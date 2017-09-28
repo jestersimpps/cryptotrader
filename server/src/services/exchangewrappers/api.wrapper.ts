@@ -13,7 +13,7 @@ export abstract class ApiWrapper {
     abstract publicEndpoints: string[];
     abstract exchange: Exchange;
 
-    abstract getTicker(): Observable<TickerDto[]>
+    abstract getTickers(): Observable<TickerDto[]>
     abstract getOhlc(query: { base: string, quote: string, limit: number, period: HistoryPeriod }): Observable<any[]>
 
     protected composeUrl(command: string, endPointId: number = 0) {

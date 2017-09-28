@@ -13,7 +13,7 @@ export class BittrexWrapper extends ApiWrapper {
     publicEndpoints = [`https://bittrex.com/api/v1.1/public/`];
     exchange = Exchange.bittrex;
 
-    getTicker(): Observable<TickerDto[]> {
+    getTickers(): Observable<TickerDto[]> {
         const url = this.composeUrl(`getmarketsummaries`);
         return RxHttpRequest.get(url, {}).map((data) => {
             if (data.response.statusCode === 200) {

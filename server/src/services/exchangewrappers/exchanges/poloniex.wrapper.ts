@@ -14,7 +14,7 @@ export class PoloniexWrapper extends ApiWrapper {
     publicEndpoints = [`https://poloniex.com/public?command=`];
     exchange = Exchange.poloniex;
 
-    getTicker(): Observable<TickerDto[]> {
+    getTickers(): Observable<TickerDto[]> {
         const url = this.composeUrl(`returnTicker`);
         //TODO: create request delegate in apiwrapper
         return RxHttpRequest.get(url, {}).map((data) => {

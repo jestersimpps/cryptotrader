@@ -8,34 +8,32 @@ const HttpsProxyAgent = require('https-proxy-agent');
  * This is especially useful during app development to avoid CORS issues while running a local server.
  * For more details and options, see https://github.com/angular/angular-cli#proxy-to-backend
  */
-const proxyConfig = [
-  {
+const proxyConfig = [{
     context: '/api',
     pathRewrite: { '^/api': '' },
-    target: 'https://api.chucknorris.io',
+    target: '',
     changeOrigin: true,
     secure: false
-  }
-];
+}];
 
 /*
  * Configures a corporate proxy agent for the API proxy if needed.
  */
 function setupForCorporateProxy(proxyConfig) {
-  if (!Array.isArray(proxyConfig)) {
-    proxyConfig = [proxyConfig];
-  }
+    if (!Array.isArray(proxyConfig)) {
+        proxyConfig = [proxyConfig];
+    }
 
-  const proxyServer = process.env.http_proxy || process.env.HTTP_PROXY;
-  let agent = null;
+    const proxyServer = process.env.http_proxy || process.env.HTTP_PROXY;
+    let agent = null;
 
-  if (proxyServer) {
-    console.log(`Using corporate proxy server: ${proxyServer}`);
-    agent = new HttpsProxyAgent(proxyServer);
-    proxyConfig.forEach(entry => { entry.agent = agent; });
-  }
+    if (proxyServer) {
+        console.log(`Using corporate proxy server: ${proxyServer}`);
+        agent = new HttpsProxyAgent(proxyServer);
+        proxyConfig.forEach(entry => { entry.agent = agent; });
+    }
 
-  return proxyConfig;
+    return proxyConfig;
 }
 
 module.exports = setupForCorporateProxy(proxyConfig);

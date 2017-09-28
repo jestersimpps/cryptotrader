@@ -27,7 +27,7 @@ async function loadData() {
 
     Observable.forkJoin(...tasks$).subscribe(tickerData => {
         tickerData.forEach((ticker: TickerDto[]) => {
-            redisClient.set(`${ticker[0].exchange}_ticker`, JSON.stringify(ticker));
+            redisClient.set(`${ticker[0].exchange}_tickers`, JSON.stringify(ticker));
             // Adds latest ohlc data point to each individual pair;
             addToOhlc(ticker);
             console.log(`set ${ticker[0].exchange} ticker data in redis cache.`);

@@ -2,14 +2,14 @@
     <div class="col-sm-12">
         <a [routerLink]="['/exchanges',currencyPair?.exchange, currencyPair?.base + currencyPair?.quote]" routerLinkActive="active" (click)="setCurrencyPair()">{{currencyPair?.symbol}}</a>
 
-        <span *ngIf="currencyPair?.percentage > 0" class="badge badge-pill badge-success pull-right" data-toggle="tooltip" data-placement="top" title="24h change">{{currencyPair?.percentage | percent}}</span>
-        <span *ngIf="currencyPair?.percentage < 0" class="badge badge-pill badge-danger pull-right" data-toggle="tooltip" data-placement="top" title="24h change">{{currencyPair?.percentage | percent}}</span>
-        <span *ngIf="currencyPair?.percentage == 0" class="badge badge-pill badge-default pull-right" data-toggle="tooltip" data-placement="top" title="24h change">{{currencyPair?.percentage | percent}}</span>
+        <span *ngIf="currencyPair?.percentChange > 0" class="badge badge-pill badge-success pull-right" data-toggle="tooltip" data-placement="top" title="24h change">{{currencyPair?.percentChange | number:'1.0-3' | percent}}</span>
+        <span *ngIf="currencyPair?.percentChange < 0" class="badge badge-pill badge-danger pull-right" data-toggle="tooltip" data-placement="top" title="24h change">{{currencyPair?.percentChange | number:'1.0-3' | percent}}</span>
+        <span *ngIf="currencyPair?.percentChange == 0" class="badge badge-pill badge-default pull-right" data-toggle="tooltip" data-placement="top" title="24h change">{{currencyPair?.percentChange | number:'1.0-3' | percent}}</span>
     </div>
     <div #chart class="chart"></div>
     <div class="col-sm-6 data">
         <span translate>Volume</span>
-        <span class="pull-right">{{currencyPair?.baseVolume | number:'1.0-2'}} {{currencyPair?.quote}}</span>
+        <span class="pull-right">{{currencyPair?.volume | number:'1.0-2'}} {{currencyPair?.quote}}</span>
     </div>
     <div class="col-sm-6 data">
         <span translate>Price</span>

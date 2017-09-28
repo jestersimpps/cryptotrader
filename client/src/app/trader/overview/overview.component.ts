@@ -1,7 +1,7 @@
+import { TickerDto } from './../../../../../common/dtos/ticker.model';
 import { Observable } from 'rxjs/Observable';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OverviewService } from './overview.service';
-import { CurrencyPair } from './../../models/currencypair.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MdSidenav } from '@angular/material';
 
@@ -12,8 +12,8 @@ import { MdSidenav } from '@angular/material';
 })
 export class OverviewComponent implements OnInit {
 
-  currencyPairs: Observable<CurrencyPair[]>;
-  selectedCurrencyPair: CurrencyPair;
+  currencyPairs: Observable<TickerDto[]>;
+  selectedCurrencyPair: TickerDto;
   isLoading: boolean;
 
   @ViewChild(`start`) leftSidePanel: MdSidenav;
@@ -26,7 +26,7 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.overviewService.selectedCurrencyPairChange.subscribe((selectedCurrencyPair: CurrencyPair) => {
+    this.overviewService.selectedCurrencyPairChange.subscribe((selectedCurrencyPair: TickerDto) => {
       this.selectedCurrencyPair = selectedCurrencyPair;
       this.rightSidePanel.open();
     });
