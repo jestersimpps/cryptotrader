@@ -25,22 +25,24 @@ export class ChartComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         this.overviewService.selectedCurrencyPairChange.subscribe((selectedCurrencyPair: TickerDto) => {
-            new TradingView.widget({
-                "container_id": "chart",
-                "autosize": true,
-                "symbol": `${selectedCurrencyPair.percentChange}:${selectedCurrencyPair.base}${selectedCurrencyPair.quote}`,
-                "interval": "5",
-                "timezone": "Etc/UTC",
-                "theme": "Dark",
-                "style": "1",
-                "locale": "en",
-                "toolbar_bg": "RGBA(19, 23, 34, 1.00)",
-                "enable_publishing": false,
-                "withdateranges": false,
-                "hide_side_toolbar": false,
-                "allow_symbol_change": true,
-                "show_popup_button": true
+            const tv = new TradingView.widget({
+                'container_id': 'chart',
+                'autosize': true,
+                // tslint:disable-next-line:max-line-length
+                'symbol': `${selectedCurrencyPair.exchange}:${selectedCurrencyPair.base}${selectedCurrencyPair.quote}`,
+                'interval': '5',
+                'timezone': 'Etc/UTC',
+                'theme': 'Dark',
+                'style': '1',
+                'locale': 'en',
+                'toolbar_bg': 'RGBA(19, 23, 34, 1.00)',
+                'enable_publishing': false,
+                'withdateranges': false,
+                'hide_side_toolbar': false,
+                'allow_symbol_change': true,
+                'show_popup_button': true
             });
+            console.log(tv);
         });
 
     }

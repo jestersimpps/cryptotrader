@@ -40,20 +40,20 @@ export class ExchangeService {
         }
     }
 
-    getTicker(exchange: Exchange, symbol: string, fromCache: boolean): Observable<any[]> {
-        switch (exchange.toLowerCase()) {
-            case Exchange.poloniex:
-                return fromCache ? this.getFromCache(`${Exchange.poloniex}_ticker_${symbol}`) : this.poloniexWrapper.getTicker();
-            case Exchange.kraken:
-                return fromCache ? this.getFromCache(`${Exchange.kraken}_ticker_${symbol}`) : this.krakenWrapper.getTicker();
-            case Exchange.bittrex:
-                return fromCache ? this.getFromCache(`${Exchange.bittrex}_ticker_${symbol}`) : this.bittrexWrapper.getTicker();
-            case Exchange.bitfinex:
-                return fromCache ? this.getFromCache(`${Exchange.bitfinex}_ticker_${symbol}`) : this.bitfinexWrapper.getTicker();
-            default:
-                return Observable.of([`${exchange} not yet implemented`]);
-        }
-    }
+    // getTicker(exchange: Exchange, symbol: string, fromCache: boolean): Observable<any[]> {
+    //     switch (exchange.toLowerCase()) {
+    //         case Exchange.poloniex:
+    //             return fromCache ? this.getFromCache(`${Exchange.poloniex}_ticker_${symbol}`) : this.poloniexWrapper.getTicker();
+    //         case Exchange.kraken:
+    //             return fromCache ? this.getFromCache(`${Exchange.kraken}_ticker_${symbol}`) : this.krakenWrapper.getTicker();
+    //         case Exchange.bittrex:
+    //             return fromCache ? this.getFromCache(`${Exchange.bittrex}_ticker_${symbol}`) : this.bittrexWrapper.getTicker();
+    //         case Exchange.bitfinex:
+    //             return fromCache ? this.getFromCache(`${Exchange.bitfinex}_ticker_${symbol}`) : this.bitfinexWrapper.getTicker();
+    //         default:
+    //             return Observable.of([`${exchange} not yet implemented`]);
+    //     }
+    // }
 
     getOhlc(exchange: Exchange, query: { base: string, quote: string, limit: number, period: HistoryPeriod }) {
         switch (exchange.toLowerCase()) {

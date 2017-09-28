@@ -10,15 +10,15 @@ export class ExchangeController {
 
     constructor(private exchangeService: ExchangeService) { }
 
-    @Get(':exchange/ticker')
+    @Get(':exchange/tickers')
     getTickers( @Param() params: { exchange: Exchange }): Observable<TickerDto[]> {
         return this.exchangeService.getTickers(params.exchange, true);
     }
 
-    @Get(':exchange/ticker')
-    getTicker( @Param() params: { exchange: Exchange }): Observable<TickerDto[]> {
-        return this.exchangeService.getTicker(params.exchange, true);
-    }
+    // @Get(':exchange/ticker')
+    // getTicker( @Param() params: { exchange: Exchange }): Observable<TickerDto[]> {
+    //     return this.exchangeService.getTicker(params.exchange, true);
+    // }
 
     @Get(':exchange/ohlc')
     getOhlc( @Param() params: { exchange: Exchange }, @Query() query: { base: string, quote: string, limit: number, period: HistoryPeriod }): Observable<TickerDto[]> {
