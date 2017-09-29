@@ -7,7 +7,7 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 const routes = {
-    tradingPair: (exchange: string, quote: string, base: string) => `${exchange}/tradingpairs/${quote}/${base}`,
+    tradingPair: (exchange: string, symbol: string) => `exchange/${exchange}/ticker/${symbol}`,
 };
 
 @Injectable()
@@ -17,7 +17,7 @@ export class SidepanelService {
 
     getTradingPair(currencyPair: TickerDto): Observable<any> {
         // tslint:disable-next-line:max-line-length
-        return this.http.get(routes.tradingPair(currencyPair.exchange, currencyPair.base, currencyPair.quote), { cache: false })
+        return this.http.get(routes.tradingPair(currencyPair.exchange, currencyPair.symbol), { cache: false })
             .map((res: Response) => res.json())
             .catch(() => Observable.of('Error, could not load CurrencyPair.'));
     }

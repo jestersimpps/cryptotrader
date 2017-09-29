@@ -1,6 +1,6 @@
 import { TickerDto } from './../../../../common/dtos/ticker.model';
 import * as redis from 'redis';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Rx';
 import { KrakenWrapper } from './../../services/exchangewrappers/exchanges/kraken.wrapper';
 import { PoloniexWrapper } from './../../services/exchangewrappers/exchanges/poloniex.wrapper';
 import { BittrexWrapper } from './../../services/exchangewrappers/exchanges/bittrex.wrapper';
@@ -25,21 +25,23 @@ async function loadData() {
     tasks$.push(bittrexWrapper.getTickers().do(() => console.log(`loaded ${Exchange.bittrex} ticker data.`)));
     tasks$.push(bitfinexWrapper.getTickers().do(() => console.log(`loaded ${Exchange.bitfinex} ticker data.`)));
 
-    Observable.forkJoin(...tasks$).subscribe(tickerData => {
-        tickerData.forEach((ticker: TickerDto[]) => {
-            redisClient.set(`${ticker[0].exchange}_tickers`, JSON.stringify(ticker));
-            // Adds latest ohlc data point to each individual pair;
-            addToOhlc(ticker);
-            console.log(`set ${ticker[0].exchange} ticker data in redis cache.`);
+    Observable.interval(5000).subscribe(() => {
+        Observable.forkJoin(...tasks$).subscribe(tickerData => {
+            tickerData.forEach((ticker: TickerDto[]) => {
+                if (ticker.length) {
+                    redisClient.set(`${ticker[0].exchange}_tickers`, JSON.stringify(ticker));
+                    ticker.forEach((pair: TickerDto) => {
+                        redisClient.set(`${ticker[0].exchange}_ticker_${pair.symbol}`, JSON.stringify(pair));
+                    })
+                    console.log(`set ${ticker[0].exchange} ticker data in redis cache.`);
+                }else{
+                    console.error(`Error: ${ticker}`);
+                }
+            });
+            // process.exit();
         });
-        process.exit();
-    });
+    })
 
 }
-
-function addToOhlc(ticker: TickerDto[]) {
-
-}
-
 
 loadData();
