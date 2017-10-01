@@ -51,6 +51,7 @@ export class HeaderComponent implements OnInit {
       `poloniex`,
       `bittrex`,
       `kraken`,
+      `bitfinex`,
     ]
   }
 

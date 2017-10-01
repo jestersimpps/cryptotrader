@@ -2,30 +2,30 @@
     <div class="card-block">
         <h4 class="card-title">
             <div class="currencyblock">
-                <a [routerLink]="['/exchanges',currencyPair?.exchange, currencyPair?.base + currencyPair?.quote ]" routerLinkActive="active">{{currencyPair?.symbol}}</a>
-                <span *ngIf="currencyPair?.percentChange > 0" class="badge badge-pill badge-success pull-right">{{currencyPair?.percentChange | percent}}</span>
-                <span *ngIf="currencyPair?.percentChange < 0" class="badge badge-pill badge-danger pull-right">{{currencyPair?.percentChange | percent}}</span>
-                <span *ngIf="currencyPair?.percentChange == 0" class="badge badge-pill badge-default pull-right">{{currencyPair?.percentChange | percent}}</span>
+                <span class="pair" (click)="selectPair()">{{currencyInfo?.base}}/{{currencyInfo?.quote}}</span>
+                <span *ngIf="currencyInfo?.percentChange > 0" class="badge badge-pill badge-success pull-right">{{currencyInfo?.percentChange | percent}}</span>
+                <span *ngIf="currencyInfo?.percentChange < 0" class="badge badge-pill badge-danger pull-right">{{currencyInfo?.percentChange | percent}}</span>
+                <span *ngIf="currencyInfo?.percentChange == 0" class="badge badge-pill badge-default pull-right">{{currencyInfo?.percentChange | percent}}</span>
             </div>
             <div class="info">
-                <span class="" translate>{{currencyPair?.exchange}}</span>
+                <span class="" translate>{{currencyInfo?.exchange}}</span>
                 <span class="right">{{currencyInfo?.updated | date:'medium'}}</span>
             </div>
         </h4>
 
         <h6 class="price text-right">
-            {{currencyInfo?.last | number:'1.8-8'}} {{currencyPair?.quote}}
+            {{currencyInfo?.last | number:'1.8-8'}} {{currencyInfo?.quote}}
         </h6>
 
         <h5 class="info">
             <span class="high" translate>High</span>
-            <span class="right high">{{currencyInfo?.high | number:'1.8-8'}} {{currencyPair?.quote}}</span>
+            <span class="right high">{{currencyInfo?.high | number:'1.8-8'}} {{currencyInfo?.quote}}</span>
             <br>
             <span class="low" translate>Low</span>
-            <span class="right low">{{currencyInfo?.low | number:'1.8-8'}} {{currencyPair?.quote}}</span>
+            <span class="right low">{{currencyInfo?.low | number:'1.8-8'}} {{currencyInfo?.quote}}</span>
             <br>
             <span class="volume" translate>Volume</span>
-            <span class="right volume">{{currencyInfo?.volume | number:'1.0-2'}} {{currencyPair?.quote}}</span>
+            <span class="right volume">{{currencyInfo?.volume | number:'1.0-2'}} {{currencyInfo?.quote}}</span>
         </h5>
     </div>
 </div>

@@ -1,15 +1,13 @@
 <md-sidenav-container class="sidenav-fab-container">
-    <md-sidenav #start align="start" opened="true" mode="side" class="bg-inverse">
-        <app-symbolrow [hidden]="isLoading" *ngFor="let currencyPair of currencyPairs | async" [currencyPair]="currencyPair"></app-symbolrow>
+    <md-sidenav #start align="start" opened="true" mode="side" class="bg-inverse left-sidenav">
+        <app-symbolrow *ngFor="let currencyPair of currencyPairs | async" [currencyPair]="currencyPair" (emitSelectedPair)="selectedCurrencyPair = $event"></app-symbolrow>
     </md-sidenav>
-    <md-sidenav #end align="end" opened="true" mode="side" class="bg-inverse">
+    <md-sidenav #end align="end" opened="true" mode="side" class="bg-inverse right-sidenav">
         <div class="container-fluid">
-            <div *ngIf="selectedCurrencyPair">
-                <app-sidepanel [currencyPair]="selectedCurrencyPair"></app-sidepanel>
-            </div>
+            <app-sidepanel *ngIf="selectedCurrencyPair" [selectedCurrencyPair]="selectedCurrencyPair"></app-sidepanel>
         </div>
     </md-sidenav>
     <div class="content">
-        <router-outlet></router-outlet>
+        <app-chart *ngIf="selectedCurrencyPair" [selectedCurrencyPair]="selectedCurrencyPair"></app-chart>
     </div>
 </md-sidenav-container>

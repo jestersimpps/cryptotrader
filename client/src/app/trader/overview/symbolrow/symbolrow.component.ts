@@ -12,11 +12,12 @@ declare const jQuery: any;
     selector: 'app-symbolrow',
     templateUrl: './symbolrow.component.html',
     styleUrls: ['./symbolrow.component.scss'],
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SymbolRowComponent implements AfterViewInit {
 
     @Input() currencyPair: TickerDto;
+    @Output() emitSelectedPair: EventEmitter<TickerDto> = new EventEmitter();
 
     // @ViewChild('chart') chart: ElementRef;
 
@@ -27,12 +28,14 @@ export class SymbolRowComponent implements AfterViewInit {
         private router: Router) { }
 
     ngAfterViewInit() {
-        this.drawCharts();
+        // this.drawCharts();
+    }
+
+    private selectPair() {
+        this.emitSelectedPair.emit(this.currencyPair);
     }
 
     private drawCharts() {
-        const price: number[] = this.currencyPair.history.map(x => x.p);
-        const volume: number[] = this.currencyPair.history.map(x => x.v);
 
         // Bar + line composite charts
         // jQuery(this.chart.nativeElement).sparkline(volume, {

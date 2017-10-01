@@ -8,7 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class OpenordersComponent implements OnInit {
 
-  @Input() currencyPair: TickerDto;
+  @Input() currencyInfo: TickerDto;
 
   constructor() { }
 

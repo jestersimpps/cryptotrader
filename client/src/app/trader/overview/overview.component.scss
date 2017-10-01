@@ -7,9 +7,14 @@
     height: 100%;
 }
 
-.sidenav-fab-container md-sidenav {
+.sidenav-fab-container .left-sidenav {
     padding-top: 60px;
-    width: 450px;
+    width: 220px;
+}
+
+.sidenav-fab-container .right-sidenav {
+    padding-top: 60px;
+    width: 420px;
 }
 
 .sidenav-fab-container .mat-sidenav-content,

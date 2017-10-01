@@ -2,7 +2,7 @@ import { TickerDto } from './../../../../../common/dtos/ticker.model';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OverviewService } from './overview.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MdSidenav } from '@angular/material';
 
 @Component({
@@ -10,11 +10,10 @@ import { MdSidenav } from '@angular/material';
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss']
 })
-export class OverviewComponent implements OnInit {
+export class OverviewComponent implements AfterViewInit {
 
   currencyPairs: Observable<TickerDto[]>;
   selectedCurrencyPair: TickerDto;
-  isLoading: boolean;
 
   @ViewChild(`start`) leftSidePanel: MdSidenav;
   @ViewChild(`end`) rightSidePanel: MdSidenav;
@@ -22,10 +21,12 @@ export class OverviewComponent implements OnInit {
   constructor(
     private overviewService: OverviewService,
     private activatedRoute: ActivatedRoute) {
+    this.currencyPairs = Observable.from([]);
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.activatedRoute.params.subscribe(params => {
+      console.log(params);
       const exchange = params['exchange'];
       this.reloadPairs(exchange);
     });
@@ -39,5 +40,6 @@ export class OverviewComponent implements OnInit {
         return this.overviewService.getTradingPairs(exchange);
       })
   }
+
 
 }

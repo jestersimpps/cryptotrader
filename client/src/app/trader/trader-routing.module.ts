@@ -15,6 +15,9 @@ const routes: Routes = Route.withShell(
   {
     path: 'exchanges',
     component: TraderComponent,
+    children: [
+      { path: ':exchange', component: OverviewComponent },
+    ]
   }
   ]);
 

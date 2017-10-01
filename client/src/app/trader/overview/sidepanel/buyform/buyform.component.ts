@@ -8,8 +8,7 @@ import { Input, Component } from '@angular/core';
 })
 export class BuyFormComponent {
 
-    @Input() currencyPair: TickerDto;
-    @Input() currencyInfo: any;
+    @Input() currencyInfo: TickerDto;
 
     constructor() { }
 

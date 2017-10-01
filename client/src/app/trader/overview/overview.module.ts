@@ -1,6 +1,5 @@
 import { SharedModule } from './../../shared/shared.module';
 import { ChartComponent } from './chartcomponent/chart.component';
-import { OverviewRoutingModule } from './overview-routing.module';
 import { SymbolRowComponent } from './symbolrow/symbolrow.component';
 import { OverviewService } from './overview.service';
 import { TradehistoryComponent } from './sidepanel/tradehistory/tradehistory.component';
@@ -24,7 +23,6 @@ import { NgModule } from '@angular/core';
         TranslateModule,
         CoreModule,
         MdSidenavModule,
-        OverviewRoutingModule,
         MaterialModule.forRoot(),
         SharedModule,
         HttpClientModule

@@ -1,7 +1,7 @@
-<app-cryptoheader [currencyInfo]="currencyInfo" [currencyPair]="currencyPair"></app-cryptoheader>
+<app-cryptoheader [currencyInfo]="currencyInfo | async"></app-cryptoheader>
 <br>
-<app-buyform [currencyInfo]="currencyInfo" [currencyPair]="currencyPair "></app-buyform>
+<app-buyform [currencyInfo]="currencyInfo | async"></app-buyform>
 <br>
-<app-tradehistory [currencyPair]="currencyInfo "></app-tradehistory>
+<app-tradehistory [currencyInfo]="currencyInfo | async"></app-tradehistory>
 <br>
-<app-openorders [currencyPair]="currencyInfo"></app-openorders>
+<app-openorders [currencyInfo]="currencyInfo | async"></app-openorders>

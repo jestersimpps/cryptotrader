@@ -1,6 +1,6 @@
 import { TickerDto } from './../../../../../../common/dtos/ticker.model';
 import { Observable } from 'rxjs/Rx'
-import { Input, Component, OnInit } from '@angular/core';
+import { Input, Component, OnInit, OnChanges } from '@angular/core';
 import { SidepanelService } from 'app/trader/overview/sidepanel/sidepanel.service';
 
 @Component({
@@ -11,22 +11,25 @@ import { SidepanelService } from 'app/trader/overview/sidepanel/sidepanel.servic
         SidepanelService
     ]
 })
-export class SidePanelComponent implements OnInit {
+export class SidePanelComponent implements OnChanges {
 
-    currencyInfo: any;
+    currencyInfo: Observable<any>;
 
-    @Input() currencyPair: TickerDto;
+    @Input() selectedCurrencyPair: TickerDto;
 
     constructor(private sidepanelService: SidepanelService) {
 
     }
 
-    ngOnInit() {
-        Observable
+    ngOnChanges() {
+        this.currencyInfo = Observable
             .interval(5000)
+            .startWith(0)
             .switchMap(() => {
-                return this.sidepanelService.getTradingPair(this.currencyPair);
-            }).subscribe(currencyInfo => this.currencyInfo = currencyInfo)
+                return this.sidepanelService.getTradingPair(this.selectedCurrencyPair);
+            })
+            .share()
+
     }
 
 }

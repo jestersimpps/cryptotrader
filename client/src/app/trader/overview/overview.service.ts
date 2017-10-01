@@ -26,8 +26,7 @@ export class OverviewService {
     }
 
     getTradingPairs(exchange: string): Observable<TickerDto[]> {
-        return this.http.get(routes.tickers(exchange), { cache: true })
+        return this.http.get(routes.tickers(exchange), { cache: false })
             .map((res: Response) => res.json())
-            .catch(() => Observable.of('Error, could not load CurrencyPair.'));
     }
 }

@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 })
 export class CryptoheaderComponent {
 
-  @Input() currencyPair: TickerDto;
-  @Input() currencyInfo: any;
+  @Input() currencyInfo: TickerDto;
 
-  constructor(
-    private router: Router) { }
+  selectPair() {
+
+  }
 }

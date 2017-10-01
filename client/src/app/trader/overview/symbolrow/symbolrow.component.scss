@@ -31,8 +31,16 @@
     padding: 0px 20px 0px 20px;
 }
 
-a {
+.pair {
     color: #fff;
     font-size: 1.2em;
     font-weight: bolder;
+}
+
+.pair:hover {
+    cursor: pointer;
+}
+
+.badge {
+    margin-top: 5px;
 }
