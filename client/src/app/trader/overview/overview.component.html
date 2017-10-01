@@ -1,9 +1,8 @@
 <md-sidenav-container class="sidenav-fab-container">
     <md-sidenav #start align="start" opened="true" mode="side" class="bg-inverse">
-        <app-loader [isLoading]="isLoading" class="center" style="color:white;width:450px;"></app-loader>
         <app-symbolrow [hidden]="isLoading" *ngFor="let currencyPair of currencyPairs | async" [currencyPair]="currencyPair"></app-symbolrow>
     </md-sidenav>
-    <md-sidenav #end align="end" mode="side" class="bg-inverse">
+    <md-sidenav #end align="end" opened="true" mode="side" class="bg-inverse">
         <div class="container-fluid">
             <div *ngIf="selectedCurrencyPair">
                 <app-sidepanel [currencyPair]="selectedCurrencyPair"></app-sidepanel>

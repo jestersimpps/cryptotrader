@@ -1,5 +1,5 @@
 import { TickerDto } from './../../../../../common/dtos/ticker.model';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OverviewService } from './overview.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -22,14 +22,9 @@ export class OverviewComponent implements OnInit {
   constructor(
     private overviewService: OverviewService,
     private activatedRoute: ActivatedRoute) {
-    this.isLoading = false;
   }
 
   ngOnInit() {
-    this.overviewService.selectedCurrencyPairChange.subscribe((selectedCurrencyPair: TickerDto) => {
-      this.selectedCurrencyPair = selectedCurrencyPair;
-      this.rightSidePanel.open();
-    });
     this.activatedRoute.params.subscribe(params => {
       const exchange = params['exchange'];
       this.reloadPairs(exchange);
@@ -37,9 +32,12 @@ export class OverviewComponent implements OnInit {
   }
 
   reloadPairs(exchange: string) {
-    this.isLoading = true;
-    this.currencyPairs = this.overviewService.getTradingPairs(exchange)
-      .finally(() => this.isLoading = false);
+    this.currencyPairs = Observable
+      .interval(5000)
+      .startWith(0)
+      .switchMap(() => {
+        return this.overviewService.getTradingPairs(exchange);
+      })
   }
 
 }

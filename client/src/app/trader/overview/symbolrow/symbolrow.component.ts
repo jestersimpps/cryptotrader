@@ -18,21 +18,16 @@ export class SymbolRowComponent implements AfterViewInit {
 
     @Input() currencyPair: TickerDto;
 
-    @ViewChild('chart') chart: ElementRef;
+    // @ViewChild('chart') chart: ElementRef;
 
     private hoverPrice: number;
     private gain: number;
 
     constructor(
-        private router: Router,
-        private overviewService: OverviewService) { }
+        private router: Router) { }
 
     ngAfterViewInit() {
         this.drawCharts();
-    }
-
-    setCurrencyPair() {
-        this.overviewService.setSelectedCurrencyPair(this.currencyPair);
     }
 
     private drawCharts() {
@@ -40,38 +35,38 @@ export class SymbolRowComponent implements AfterViewInit {
         const volume: number[] = this.currencyPair.history.map(x => x.v);
 
         // Bar + line composite charts
-        jQuery(this.chart.nativeElement).sparkline(volume, {
-            lineColor: '#383B3C',
-            fillColor: '#383B3C',
-            spotColor: '#2E6DDF',
-            maxSpotColor: '#5CB85C',
-            minSpotColor: '#D9534F',
-            highlightSpotColor: 'cyan',
-            highlightLineColor: 'cyan',
-            height: '50',
-            width: '100%',
-            tooltipFormat: 'Volume: {{y:val}}',
+        // jQuery(this.chart.nativeElement).sparkline(volume, {
+        //     lineColor: '#383B3C',
+        //     fillColor: '#383B3C',
+        //     spotColor: '#2E6DDF',
+        //     maxSpotColor: '#5CB85C',
+        //     minSpotColor: '#D9534F',
+        //     highlightSpotColor: 'cyan',
+        //     highlightLineColor: 'cyan',
+        //     height: '50',
+        //     width: '100%',
+        //     tooltipFormat: 'Volume: {{y:val}}',
 
-        });
-        jQuery(this.chart.nativeElement).sparkline(price, {
-            lineColor: 'cyan',
-            fillColor: false,
-            spotColor: '#2E6DDF',
-            maxSpotColor: '#5CB85C',
-            minSpotColor: '#D9534F',
-            highlightSpotColor: 'cyan',
-            highlightLineColor: 'cyan',
-            height: '50',
-            composite: true,
-            lineWidth: 1,
-            width: '100%',
-            tooltipFormat: 'Price: {{y:val}}',
+        // });
+        // jQuery(this.chart.nativeElement).sparkline(price, {
+        //     lineColor: 'cyan',
+        //     fillColor: false,
+        //     spotColor: '#2E6DDF',
+        //     maxSpotColor: '#5CB85C',
+        //     minSpotColor: '#D9534F',
+        //     highlightSpotColor: 'cyan',
+        //     highlightLineColor: 'cyan',
+        //     height: '50',
+        //     composite: true,
+        //     lineWidth: 1,
+        //     width: '100%',
+        //     tooltipFormat: 'Price: {{y:val}}',
 
-        }).bind('sparklineClick', (ev: any) => {
-            const sparkline = ev.sparklines[1];
-            const region = sparkline.getCurrentRegionFields();
-            this.setCurrencyPair();
-        });
+        // }).bind('sparklineClick', (ev: any) => {
+        //     const sparkline = ev.sparklines[1];
+        //     const region = sparkline.getCurrentRegionFields();
+        //     this.setCurrencyPair();
+        // });
     }
 
 

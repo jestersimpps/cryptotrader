@@ -13,9 +13,9 @@ import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { CoreModule } from './../../core/core.module';
 import { MdSidenavModule, MaterialModule } from '@angular/material';
-import { NgModule } from "@angular/core";
 import { HttpClientModule } from '@angular/common/http';
 import { SidePanelComponent } from 'app/trader/overview/sidepanel/sidepanel.component';
+import { NgModule } from '@angular/core';
 
 
 @NgModule({

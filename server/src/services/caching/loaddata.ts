@@ -25,20 +25,19 @@ async function loadData() {
     tasks$.push(bittrexWrapper.getTickers().do(() => console.log(`loaded ${Exchange.bittrex} ticker data.`)));
     tasks$.push(bitfinexWrapper.getTickers().do(() => console.log(`loaded ${Exchange.bitfinex} ticker data.`)));
 
-    Observable.interval(5000).subscribe(() => {
+    Observable.interval(10000).subscribe(() => {
         Observable.forkJoin(...tasks$).subscribe(tickerData => {
             tickerData.forEach((ticker: TickerDto[]) => {
-                if (ticker.length) {
+                if (ticker && ticker.length) {
                     redisClient.set(`${ticker[0].exchange}_tickers`, JSON.stringify(ticker));
                     ticker.forEach((pair: TickerDto) => {
                         redisClient.set(`${ticker[0].exchange}_ticker_${pair.symbol}`, JSON.stringify(pair));
                     })
-                    console.log(`set ${ticker[0].exchange} ticker data in redis cache.`);
-                }else{
+                } else {
                     console.error(`Error: ${ticker}`);
                 }
             });
-            // process.exit();
+            console.log(`${new Date()} - new ticker data in redis cache.`);
         });
     })
 
