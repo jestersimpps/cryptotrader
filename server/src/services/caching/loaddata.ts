@@ -20,10 +20,10 @@ async function loadData() {
     /**
      * Load ticker data
      */
-    tasks$.push(poloniexWrapper.getTickers().do(() => console.log(`loaded ${Exchange.poloniex} ticker data.`)));
-    tasks$.push(krakenWrapper.getTickers().do(() => console.log(`loaded ${Exchange.kraken} ticker data.`)));
-    tasks$.push(bittrexWrapper.getTickers().do(() => console.log(`loaded ${Exchange.bittrex} ticker data.`)));
-    tasks$.push(bitfinexWrapper.getTickers().do(() => console.log(`loaded ${Exchange.bitfinex} ticker data.`)));
+    tasks$.push(poloniexWrapper.getTickers().do(() => console.log(`loaded ${Exchange.poloniex} ticker data.`)).onErrorResumeNext());
+    tasks$.push(krakenWrapper.getTickers().do(() => console.log(`loaded ${Exchange.kraken} ticker data.`)).onErrorResumeNext());
+    tasks$.push(bittrexWrapper.getTickers().do(() => console.log(`loaded ${Exchange.bittrex} ticker data.`)).onErrorResumeNext());
+    tasks$.push(bitfinexWrapper.getTickers().do(() => console.log(`loaded ${Exchange.bitfinex} ticker data.`)).onErrorResumeNext());
 
     Observable.interval(10000).subscribe(() => {
         Observable.forkJoin(...tasks$).subscribe(tickerData => {

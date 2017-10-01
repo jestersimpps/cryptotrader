@@ -26,7 +26,7 @@ export class BittrexWrapper extends ApiWrapper {
                         last: +key.Last,
                         ask: +key.Ask,
                         bid: +key.Bid,
-                        percentChange: +Number((key.PrevDay - key.Last) / key.PrevDay).toFixed(8),
+                        percentChange: +Number((key.Last - key.PrevDay) / key.PrevDay).toFixed(8),
                         base: key.MarketName.split(`-`)[1],
                         quote: key.MarketName.split(`-`)[0],
                         volume: +key.BaseVolume,

@@ -44,7 +44,7 @@ export class KrakenWrapper extends ApiWrapper {
                             last: +body[key].c[0],
                             ask: +body[key].a[0],
                             bid: +body[key].b[0],
-                            percentChange: +Number((body[key].o - body[key].c[0]) / body[key].o).toFixed(8),
+                            percentChange: +Number((body[key].c[0] - body[key].o ) / body[key].o).toFixed(8),
                             base: pairs.find(p => p.key == key).base,
                             quote: pairs.find(p => p.key == key).quote,
                             volume: +body[key].v[0],
