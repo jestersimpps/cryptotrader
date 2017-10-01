@@ -1,16 +1,16 @@
 <div class="row tradeBlock">
-    <div class="col-sm-12">
+    <div class="col-sm-12" [@animate]="'fadeIn'">
         <span class="pair" (click)="selectPair()">{{currencyPair?.base}}/{{currencyPair?.quote}}</span>
         <span *ngIf="currencyPair?.percentChange > 0" class="badge  badge-success pull-right" data-toggle="tooltip" data-placement="top" title="24h change">{{currencyPair?.percentChange | number:'1.0-3' | percent}}</span>
         <span *ngIf="currencyPair?.percentChange < 0" class="badge  badge-danger pull-right" data-toggle="tooltip" data-placement="top" title="24h change">{{currencyPair?.percentChange | number:'1.0-3' | percent}}</span>
         <span *ngIf="currencyPair?.percentChange == 0" class="badge  badge-default pull-right" data-toggle="tooltip" data-placement="top" title="24h change">{{currencyPair?.percentChange | number:'1.0-3' | percent}}</span>
     </div>
     <!-- <div #chart class="chart"></div> -->
-    <div class="col-sm-12 data">
+    <div class="col-sm-12 data" [@animate]="'fadeIn'">
         <span translate>Price</span>
         <span class="pull-right">{{currencyPair?.last | number:'1.8-8'}} {{currencyPair?.quote}}</span>
     </div>
-    <div class="col-sm-12 data">
+    <div class="col-sm-12 data" [@animate]="'fadeIn'">
         <span translate>Volume</span>
         <span class="pull-right">{{currencyPair?.volume | number:'1.0-2'}} {{currencyPair?.quote}}</span>
     </div>

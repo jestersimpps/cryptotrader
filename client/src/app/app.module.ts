@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { TraderModule } from './trader/trader.module';
 import { LoginModule } from './login/login.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { LoginModule } from './login/login.module';
     TraderModule,
     LoginModule,
     AppRoutingModule,
-
+    BrowserAnimationsModule
   ],
   declarations: [
     AppComponent,

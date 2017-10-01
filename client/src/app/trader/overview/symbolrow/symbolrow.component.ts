@@ -5,6 +5,7 @@ import {
     Component, OnInit, ViewChild, Input, ViewChildren, EventEmitter,
     QueryList, AfterViewInit, ElementRef, Output, ChangeDetectionStrategy
 } from '@angular/core';
+import { animateFactory } from 'ng2-animate';
 
 declare const jQuery: any;
 
@@ -13,6 +14,8 @@ declare const jQuery: any;
     templateUrl: './symbolrow.component.html',
     styleUrls: ['./symbolrow.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [animateFactory(300, 100, 'ease-in')]
+
 })
 export class SymbolRowComponent implements AfterViewInit {
 

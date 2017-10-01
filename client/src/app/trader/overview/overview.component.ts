@@ -8,7 +8,8 @@ import { MdSidenav } from '@angular/material';
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss']
+  styleUrls: ['./overview.component.scss'],
+
 })
 export class OverviewComponent implements AfterViewInit {
 
@@ -24,9 +25,12 @@ export class OverviewComponent implements AfterViewInit {
     this.currencyPairs = Observable.from([]);
   }
 
+  trackByFn(index: number, currencyPair: TickerDto) {
+    return currencyPair.last || currencyPair.volume || currencyPair.percentChange;
+  }
+
   ngAfterViewInit() {
     this.activatedRoute.params.subscribe(params => {
-      console.log(params);
       const exchange = params['exchange'];
       this.reloadPairs(exchange);
     });
