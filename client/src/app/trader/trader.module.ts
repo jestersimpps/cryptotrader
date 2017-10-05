@@ -1,3 +1,4 @@
+import { StrategyComponent } from './../strategy/strategy.component';
 import { DashboardComponent } from './../dashboard/dashboard.component';
 import { OverviewService } from './overview/overview.service';
 import { OverviewComponent } from './overview/overview.component';
@@ -9,7 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { CoreModule } from '../core/core.module';
 import { TraderRoutingModule } from './trader-routing.module';
 import { TraderComponent } from './trader.component';
-import { OverviewModule } from 'app/trader/overview/overview.module';
+import { OverviewModule } from './overview/overview.module';
+import { StrategyModule } from './../strategy/strategy.module';
 
 @NgModule({
   imports: [
@@ -18,11 +20,12 @@ import { OverviewModule } from 'app/trader/overview/overview.module';
     CoreModule,
     TraderRoutingModule,
     OverviewModule,
-    FormsModule
+    FormsModule,
+    StrategyModule
   ],
   declarations: [
     TraderComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   providers: [
 

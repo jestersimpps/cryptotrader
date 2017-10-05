@@ -1,3 +1,4 @@
+import { StrategyComponent } from './../strategy/strategy.component';
 import { DashboardComponent } from './../dashboard/dashboard.component';
 import { OverviewComponent } from './overview/overview.component';
 import { NgModule } from '@angular/core';
@@ -11,6 +12,10 @@ const routes: Routes = Route.withShell(
   [{
     path: '',
     component: DashboardComponent,
+  },
+  {
+    path: 'strategies',
+    component: StrategyComponent,
   },
   {
     path: 'exchanges',

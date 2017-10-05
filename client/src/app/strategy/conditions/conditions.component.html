@@ -1,0 +1,106 @@
+<div class=" container-fluid">
+
+    <div class="row" *ngIf="strategy?.conditions?.length">
+        <div class="col-md-12">
+            <h4>Conditions:</h4>
+        </div>
+    </div>
+    <div class="row" *ngFor="let condition of strategy?.conditions">
+        <div class="col-md-10">
+            <span>{{condition.statement1?.selector?.name}}</span>
+            <span>{{condition.statement1?.exchange?.name}}</span>
+            <span *ngIf="condition.statement1?.exchange">{{condition.statement1?.pair?.base}}/{{condition.statement1?.pair?.quote}}</span>
+            <span>{{condition.statement1?.number}}</span>
+            <span>{{condition.comparator}}</span>
+            <span>{{condition.statement2?.selector?.name}}</span>
+            <span>{{condition.statement2?.exchange?.name}}</span>
+            <span *ngIf="condition.statement2?.exchange">{{condition.statement2?.pair?.base}}/{{condition.statement2?.pair?.quote}}</span>
+            <span>{{condition.statement2?.number}}</span>
+        </div>
+        <!-- add -->
+        <div class="col-md-2">
+            <button class="btn btn-block btn-danger btn-sm" (click)="removeCondition(condition)"><i class="fa fa-trash"></i> Remove</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>New Condition:</h4>
+        </div>
+    </div>
+    <div class="row">
+        <!-- condition selector -->
+        <div class="col-md-2">
+            <div class="form-group">
+                <select class="form-control form-control-sm" [(ngModel)]="currentCondition.statement1.selector" (change)="handleCurrentSelect(currentCondition.statement1.selector,'statement1')">
+                            <option *ngFor="let cs of conditionUi.selectors" [ngValue]="cs">{{cs.name}}</option>
+                          </select>
+            </div>
+        </div>
+        <!-- condition exchanges -->
+        <div class="col-md-2" *ngIf="conditionUi.statement1.showExchanges">
+            <div class="form-group">
+                <select class="form-control form-control-sm" [(ngModel)]="currentCondition.statement1.exchange" (change)="handleCurrentExchangeSelect(currentCondition.statement1.exchange,'statement1')">
+                            <option *ngFor="let e of conditionUi.exchanges" [ngValue]="e">{{e.name}}</option>
+                          </select>
+            </div>
+        </div>
+        <!-- condition pairs -->
+        <div class="col-md-2" *ngIf="conditionUi.statement1.showPairs">
+            <div class="form-group">
+                <select class="form-control form-control-sm" [(ngModel)]="currentCondition.statement1.pair">
+                            <option *ngFor="let p of conditionUi.statement1.pairs" [ngValue]="p">{{p.base}}/{{p.quote}}</option>
+                          </select>
+            </div>
+        </div>
+        <!-- condition number -->
+        <div class="col-md-2" *ngIf="conditionUi.statement1.showNumber">
+            <div class="form-group">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="currentCondition.statement1.number" #ctrl="ngModel">
+            </div>
+        </div>
+        <!-- check -->
+        <div class="col-md-2">
+            <div class="form-group">
+                <select class="form-control form-control-sm" [(ngModel)]="currentCondition.comparator">
+                            <option *ngFor="let c of conditionUi.comparators" [ngValue]="c">{{c}}</option>
+                          </select>
+            </div>
+        </div>
+        <!-- condition selector -->
+        <div class="col-md-2">
+            <div class="form-group">
+                <select class="form-control form-control-sm" [(ngModel)]="currentCondition.statement2.selector" (change)="handleCurrentSelect(currentCondition.statement2.selector,'statement2')">
+                            <option *ngFor="let cs of conditionUi.selectors" [ngValue]="cs">{{cs.name}}</option>
+                          </select>
+            </div>
+        </div>
+        <!-- condition exchanges -->
+        <div class="col-md-2" *ngIf="conditionUi.statement2.showExchanges">
+            <div class="form-group">
+                <select class="form-control form-control-sm" [(ngModel)]="currentCondition.statement2.exchange" (change)="handleCurrentExchangeSelect(currentCondition.statement2.exchange,'statement2')">
+                            <option *ngFor="let e of conditionUi.exchanges" [ngValue]="e">{{e.name}}</option>
+                          </select>
+            </div>
+        </div>
+        <!-- condition pairs -->
+        <div class="col-md-2" *ngIf="conditionUi.statement2.showPairs">
+            <div class="form-group">
+                <select class="form-control form-control-sm" [(ngModel)]="currentCondition.statement2.pair">
+                            <option *ngFor="let p of conditionUi.statement2.pairs" [ngValue]="p">{{p.base}}/{{p.quote}}</option>
+                          </select>
+            </div>
+        </div>
+        <!-- condition number -->
+        <div class="col-md-2" *ngIf="conditionUi.statement2.showNumber">
+            <div class="form-group">
+                <input type="text" class="form-control form-control-sm" [(ngModel)]="currentCondition.statement2.number" #ctrl="ngModel">
+            </div>
+        </div>
+        <!-- add -->
+        <div class="col-md-2">
+            <button class="btn btn-block btn-success btn-sm" (click)="pushNewCondition(currentCondition)"><i class="fa fa-plus"></i> Add</button>
+        </div>
+    </div>
+
+</div>
