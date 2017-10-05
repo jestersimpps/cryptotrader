@@ -95,7 +95,7 @@ export class ConditionsComponent implements OnInit {
                 { name: `Price`, id: `price` },
                 { name: `Volume`, id: `volume` },
                 { name: `Number`, id: `number` },
-                { name: `Balance`, id: `balance` }
+                { name: `Balance`, id: `balance` },
             ],
             comparators: <string[]>[`>`, `<`],
             exchanges: <IdName[]>[

@@ -7,14 +7,20 @@
     </div>
     <div class="row" *ngFor="let condition of strategy?.conditions">
         <div class="col-md-10">
-            <span>{{condition.statement1?.selector?.name}}</span>
+            <span *ngIf="!condition.statement1?.number">{{condition.statement1?.selector?.name}}</span>
             <span>{{condition.statement1?.exchange?.name}}</span>
-            <span *ngIf="condition.statement1?.exchange">{{condition.statement1?.pair?.base}}/{{condition.statement1?.pair?.quote}}</span>
+            <span *ngIf="condition.statement1?.exchange">
+                    {{condition.statement1?.pair?.base}}
+                    <span *ngIf="condition.statement1.selector.id != 'balance'">/{{condition.statement1?.pair?.quote}}</span>
+            </span>
             <span>{{condition.statement1?.number}}</span>
             <span>{{condition.comparator}}</span>
-            <span>{{condition.statement2?.selector?.name}}</span>
+            <span *ngIf="!condition.statement2?.number">{{condition.statement2?.selector?.name}}</span>
             <span>{{condition.statement2?.exchange?.name}}</span>
-            <span *ngIf="condition.statement2?.exchange">{{condition.statement2?.pair?.base}}/{{condition.statement2?.pair?.quote}}</span>
+            <span *ngIf="condition.statement2?.exchange">
+                    {{condition.statement2?.pair?.base}}
+                    <span *ngIf="condition.statement2.selector.id != 'balance'">/{{condition.statement2?.pair?.quote}}</span>
+            </span>
             <span>{{condition.statement2?.number}}</span>
         </div>
         <!-- add -->
@@ -49,7 +55,9 @@
         <div class="col-md-2" *ngIf="conditionUi.statement1.showPairs">
             <div class="form-group">
                 <select class="form-control form-control-sm" [(ngModel)]="currentCondition.statement1.pair">
-                            <option *ngFor="let p of conditionUi.statement1.pairs" [ngValue]="p">{{p.base}}/{{p.quote}}</option>
+                            <option *ngFor="let p of conditionUi.statement1.pairs" [ngValue]="p">{{p.base}}
+                                    <span *ngIf="currentCondition.statement1.selector.id != 'balance'">/{{p.quote}}</span>
+                                </option>                                
                           </select>
             </div>
         </div>
@@ -87,7 +95,9 @@
         <div class="col-md-2" *ngIf="conditionUi.statement2.showPairs">
             <div class="form-group">
                 <select class="form-control form-control-sm" [(ngModel)]="currentCondition.statement2.pair">
-                            <option *ngFor="let p of conditionUi.statement2.pairs" [ngValue]="p">{{p.base}}/{{p.quote}}</option>
+                            <option *ngFor="let p of conditionUi.statement2.pairs" [ngValue]="p">{{p.base}}
+                                <span *ngIf="currentCondition.statement2.selector.id != 'balance'">/{{p.quote}}</span>
+                            </option>
                           </select>
             </div>
         </div>
