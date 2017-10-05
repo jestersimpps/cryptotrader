@@ -1,1 +1,80 @@
-<h1>Dashboard</h1>
+<br>
+<div class="row" *ngFor="let condition of strategy.conditions">
+    <pre>{{condition | json}}</pre>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <!-- condition selector -->
+        <div class="col-md-2">
+            <div class="form-group">
+                <select class="form-control" [(ngModel)]="currentCondition.statement1.selector" (change)="handleCurrentSelect(currentCondition.statement1.selector,'statement1')">
+                    <option *ngFor="let cs of conditionUi.selectors" [ngValue]="cs">{{cs.name}}</option>
+                  </select>
+            </div>
+        </div>
+        <!-- condition exchanges -->
+        <div class="col-md-2" *ngIf="conditionUi.statement1.showExchanges">
+            <div class="form-group">
+                <select class="form-control" [(ngModel)]="currentCondition.statement1.exchange" (change)="handleCurrentExchangeSelect(currentCondition.statement1.exchange,'statement1')">
+                    <option *ngFor="let e of conditionUi.exchanges" [ngValue]="e">{{e.name}}</option>
+                  </select>
+            </div>
+        </div>
+        <!-- condition pairs -->
+        <div class="col-md-2" *ngIf="conditionUi.statement1.showPairs">
+            <div class="form-group">
+                <select class="form-control" [(ngModel)]="currentCondition.statement1.pair">
+                    <option *ngFor="let p of conditionUi.statement1.pairs" [ngValue]="p">{{p.quote}}/{{p.base}}</option>
+                  </select>
+            </div>
+        </div>
+        <!-- condition number -->
+        <div class="col-md-2" *ngIf="conditionUi.statement1.showNumber">
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="currentCondition.statement1.number" #ctrl="ngModel">
+            </div>
+        </div>
+        <!-- check -->
+        <div class="col-md-2">
+            <div class="form-group">
+                <select class="form-control" [(ngModel)]="currentCondition.comparator">
+                    <option *ngFor="let c of conditionUi.comparators" [ngValue]="c">{{c}}</option>
+                  </select>
+            </div>
+        </div>
+        <!-- condition selector -->
+        <div class="col-md-2">
+            <div class="form-group">
+                <select class="form-control" [(ngModel)]="currentCondition.statement2.selector" (change)="handleCurrentSelect(currentCondition.statement2.selector,'statement2')">
+                    <option *ngFor="let cs of conditionUi.selectors" [ngValue]="cs">{{cs.name}}</option>
+                  </select>
+            </div>
+        </div>
+        <!-- condition exchanges -->
+        <div class="col-md-2" *ngIf="conditionUi.statement2.showExchanges">
+            <div class="form-group">
+                <select class="form-control" [(ngModel)]="currentCondition.statement2.exchange" (change)="handleCurrentExchangeSelect(currentCondition.statement2.exchange,'statement2')">
+                    <option *ngFor="let e of conditionUi.exchanges" [ngValue]="e">{{e.name}}</option>
+                  </select>
+            </div>
+        </div>
+        <!-- condition pairs -->
+        <div class="col-md-2" *ngIf="conditionUi.statement2.showPairs">
+            <div class="form-group">
+                <select class="form-control" [(ngModel)]="currentCondition.statement2.pair">
+                    <option *ngFor="let p of conditionUi.statement2.pairs" [ngValue]="p">{{p.quote}}/{{p.base}}</option>
+                  </select>
+            </div>
+        </div>
+        <!-- condition number -->
+        <div class="col-md-2" *ngIf="conditionUi.statement2.showNumber">
+            <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="currentCondition.statement2.number" #ctrl="ngModel">
+            </div>
+        </div>
+        <!-- add -->
+        <div class="col-md-2">
+            <button class="btn btn-success" (click)="pushNewCondition(currentCondition)"><i class="fa fa-plus"></i> Add</button>
+        </div>
+    </div>
+</div>

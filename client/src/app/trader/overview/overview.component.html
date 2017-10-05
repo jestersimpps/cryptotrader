@@ -1,4 +1,4 @@
-<md-sidenav-container class="sidenav-fab-container">
+<!-- <md-sidenav-container class="sidenav-fab-container">
     <md-sidenav #start align="start" opened="true" mode="side" class="bg-inverse left-sidenav">
         <app-symbolrow *ngFor="let currencyPair of currencyPairs | async ;let i = index; trackBy: trackByFn" [currencyPair]="currencyPair" (emitSelectedPair)="selectedCurrencyPair = $event"></app-symbolrow>
     </md-sidenav>
@@ -10,4 +10,18 @@
     <div class="content">
         <app-chart *ngIf="selectedCurrencyPair" [selectedCurrencyPair]="selectedCurrencyPair"></app-chart>
     </div>
-</md-sidenav-container>
+</md-sidenav-container> -->
+<div class="row bg-inverse ">
+    <div class="col-md-4">
+        <app-symbolrow *ngFor="let currencyPair of currencyPairs | async ;let i = index; trackBy: trackByFn" [currencyPair]="currencyPair" (emitSelectedPair)="selectedCurrencyPair = $event"></app-symbolrow>
+
+    </div>
+    <div class="col-md-4">
+        <!-- <app-chart *ngIf="selectedCurrencyPair" [selectedCurrencyPair]="selectedCurrencyPair"></app-chart> -->
+
+    </div>
+    <div class="col-md-4">
+        <app-sidepanel *ngIf="selectedCurrencyPair" [selectedCurrencyPair]="selectedCurrencyPair"></app-sidepanel>
+
+    </div>
+</div>

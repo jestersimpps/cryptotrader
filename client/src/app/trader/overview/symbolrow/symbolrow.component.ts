@@ -26,7 +26,6 @@ export class SymbolRowComponent implements AfterViewInit {
 
     private hoverPrice: number;
     private gain: number;
-
     constructor(
         private router: Router) { }
 
@@ -37,6 +36,7 @@ export class SymbolRowComponent implements AfterViewInit {
     private selectPair() {
         this.emitSelectedPair.emit(this.currencyPair);
     }
+
 
     private drawCharts() {
 

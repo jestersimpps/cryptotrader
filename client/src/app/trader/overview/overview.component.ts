@@ -26,7 +26,7 @@ export class OverviewComponent implements AfterViewInit {
   }
 
   trackByFn(index: number, currencyPair: TickerDto) {
-    return currencyPair.last || currencyPair.volume || currencyPair.percentChange;
+    return currencyPair.last + currencyPair.volume + currencyPair.percentChange;
   }
 
   ngAfterViewInit() {
